@@ -1,0 +1,2 @@
+const navbar = document.querySelector('.navbar');
+navbar.style.background = `linear-gradient(to right, rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}), rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}))`;

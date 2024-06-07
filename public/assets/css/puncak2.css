@@ -1,0 +1,121 @@
+body{
+    width: 100%;
+    height: 100%;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom,darkred,black);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+}
+.img{
+  margin-top: 100px;
+  display: flex;
+
+}
+
+.uraian{
+  display: flex;
+  position: absolute;
+  top: 530px;
+  
+  color: white;
+  font-family: Geneva;
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.bi-search{
+  color: white;
+}
+
+.name {
+  font-weight: 700;
+  color: white;
+  font-family: Verdana;
+}
+
+.bi-gear{
+  color: white;
+}
+
+.bi-music-note-beamed{
+  color: white;
+}
+
+nav{
+  background: linear-gradient(to right, rgb(<?=rand(0, 255)?>, <?=rand(0, 255)?>, <?=rand(0, 255)?>), rgb(<?=rand(0, 255)?>, <?=rand(0, 255)?>, <?=rand(0, 255)?>));
+}
+
+.card{
+    position: absolute;
+    top: 650px;
+    left: 10px;
+    display: flex;
+    width: 700px;
+    height: 100px;
+    background-color: transparent;
+    display: flex;
+}
+
+.card2{
+    position: absolute;
+    top: 775px;
+    left: 10px;
+    display: flex;
+    width: 700px;
+    height: 100px;
+    background-color: transparent;
+    display: flex;
+}
+    
+.card3{
+    position: absolute;
+    top: 900px;
+    left: 10px;
+    display: flex;
+    width: 500px;
+    height: 100px;
+    background-color: transparent;
+    display: flex;
+}
+
+.card4{
+    position: absolute;
+    top: 1025px;
+    left: 10px;
+    display: flex;
+    width: 500px;
+    height: 100px;
+    background-color: transparent;
+    display: flex;
+}
+
+.foto{
+width: 100px;
+  height: 100px;
+}
+  
+
+.judul{
+  font-family: Verdana;
+  font-weight: 800;
+  font-size: 25px;
+  padding: 1px;
+  color: azure;
+  position: absolute;
+  top: 10px;
+  left: 110px;
+}
+
+.artist{ 
+  font-family: Segoe Ui;
+  font-weight: 500;
+  padding: 1px;
+  color: silver;
+  position: absolute;
+  bottom: 10px;
+  left: 110px;
+}
