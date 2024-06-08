@@ -3,7 +3,7 @@
 <?= $this->extend('/layout/listmusic_layout'); ?>
 <?= $this->section('content'); ?>
 
-<section class="utama">
+<section>
     <div class="contain">
         <div class="column1">
             <div class="incolumn1">
@@ -53,6 +53,6 @@
 
         </table>
     </div>
-</section>
+    </section>
 
 <?= $this->endSection(); ?>

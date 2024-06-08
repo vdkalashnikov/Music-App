@@ -20,29 +20,28 @@ class Home extends BaseController
     }
 
     public function lagu($id_artis = null, $id_lagu = null)
-{
-    $laguModel = new LaguModel();
-
-    if ($id_artis !== null && $id_lagu !== null) {
-        $lagu = $laguModel->joinArtis()
-                          ->where('artis.id_artis', $id_artis)
-                          ->where('lagu.id', $id_lagu)
-                          ->first();
+    {
+        $laguModel = new LaguModel();
         $artisModel = new ArtisModel();
-        $artis = $artisModel->find($id_artis);
-    } else {
-        $lagu = null;
-        $artis = null;
+
+        if ($id_artis !== null) {
+            $laguList = $laguModel->getLaguListByArtis($id_artis);
+            $currentLagu = $laguModel->getLaguById($id_lagu);
+            $artis = $artisModel->find($id_artis);
+        } else {
+            $laguList = [];
+            $currentLagu = null;
+            $artis = null;
+        }
+
+        $data = [
+            'laguList' => $laguList,
+            'currentLagu' => $currentLagu,
+            'artis' => $artis,
+            'pageTitle' => isset($currentLagu['nama_lagu']) ? $currentLagu['nama_lagu'] : "Lagu"
+        ];
+        return view('lagu', $data);
     }
-
-    $data = [
-        'lagu' => $lagu,
-        'artis' => $artis,
-        'pageTitle' => isset($lagu['nama_lagu']) ? $lagu['nama_lagu'] : "Lagu"
-    ];
-    return view('lagu', $data);
-}
-
 
     public function getSongs()
     {
@@ -58,7 +57,7 @@ class Home extends BaseController
         $artis = $artisModel->find($id_artis);
 
         $laguModel = new LaguModel();
-        $lagu = $laguModel->where('id_artis', $id_artis)->findAll();
+        $lagu = $laguModel->getLaguListByArtis($id_artis);
 
         $data = [
             'artis' => $artis,

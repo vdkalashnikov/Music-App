@@ -60,7 +60,8 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 30px;
+    justify-content: center;
+    margin-bottom: 5px;
     }
     .active{
         color: black;
@@ -75,6 +76,7 @@ body {
     opacity: 0.8;
     transition: opacity .2s;
     }
+
     
     .repeat-track:hover,
     .random-track:hover,
@@ -135,6 +137,7 @@ body {
     i.fa-volume-up {
     padding: 10px;
     }
+
     
     i,
     i.fa-play-circle,

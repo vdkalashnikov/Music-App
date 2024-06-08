@@ -19,7 +19,23 @@ class LaguModel extends Model
 
     public function joinArtis()
     {
-        $artis = new ArtisModel();
-        return $this->join('artis', 'artis.id_artis = lagu.id_artis', 'left');
+        return $this->select('lagu.*, artis.nama as nama')
+                    ->join('artis', 'artis.id_artis = lagu.id_artis', 'left');
+    }
+
+    public function getLaguListByArtis($id_artis)
+    {
+        return $this->select('lagu.*, artis.nama as nama')
+                    ->join('artis', 'artis.id_artis = lagu.id_artis', 'left')
+                    ->where('lagu.id_artis', $id_artis)
+                    ->findAll();
+    }
+
+    public function getLaguById($id_lagu)
+    {
+        return $this->select('lagu.*, artis.nama as nama')
+                    ->join('artis', 'artis.id_artis = lagu.id_artis', 'left')
+                    ->where('lagu.id', $id_lagu)
+                    ->first();
     }
 }
