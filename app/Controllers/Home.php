@@ -20,28 +20,38 @@ class Home extends BaseController
     }
 
     public function lagu($id_artis = null, $id_lagu = null)
-    {
-        $laguModel = new LaguModel();
-        $artisModel = new ArtisModel();
+{
+    $laguModel = new LaguModel();
+    $artisModel = new ArtisModel();
 
-        if ($id_artis !== null) {
-            $laguList = $laguModel->getLaguListByArtis($id_artis);
-            $currentLagu = $laguModel->getLaguById($id_lagu);
-            $artis = $artisModel->find($id_artis);
-        } else {
-            $laguList = [];
-            $currentLagu = null;
-            $artis = null;
-        }
-
-        $data = [
-            'laguList' => $laguList,
-            'currentLagu' => $currentLagu,
-            'artis' => $artis,
-            'pageTitle' => isset($currentLagu['nama_lagu']) ? $currentLagu['nama_lagu'] : "Lagu"
-        ];
-        return view('lagu', $data);
+    if ($id_artis !== null) {
+        $laguList = $laguModel->getLaguListByArtis($id_artis);
+        $currentLagu = $laguModel->getLaguById($id_lagu);
+        $artis = $artisModel->find($id_artis);
+    } else {
+        $laguList = [];
+        $currentLagu = null;
+        $artis = null;
     }
+
+    // Membuat pageTitle dengan nama artis dan nama lagu
+    if ($artis !== null && $currentLagu !== null) {
+        $pageTitle = $artis['nama'] . " - " . $currentLagu['nama_lagu'];
+    } elseif ($currentLagu !== null) {
+        $pageTitle = $currentLagu['nama_lagu'];
+    } else {
+        $pageTitle = "Lagu";
+    }
+
+    $data = [
+        'laguList' => $laguList,
+        'currentLagu' => $currentLagu,
+        'artis' => $artis,
+        'pageTitle' => $pageTitle
+    ];
+    return view('lagu', $data);
+}
+
 
     public function getSongs()
     {

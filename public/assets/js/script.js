@@ -71,11 +71,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     function playRandom() {
         isRandom = true;
         randomIcon.classList.add('randomActive');
+        document.querySelector('.fa-random').style.color = "green";
     }
 
     function pauseRandom() {
         isRandom = false;
         randomIcon.classList.remove('randomActive');
+        document.querySelector('.fa-random').style.color = "black";
     }
 
     function repeatTrack() {

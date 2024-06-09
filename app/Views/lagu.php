@@ -47,19 +47,19 @@
             <span class="stroke"></span>
             <span class="stroke"></span>
             <span class="stroke"></span>
-        </div>  
+        </div>
     </div>
 </div>
 
 <script>
-    let musicList = <?= json_encode(array_map(function($lagu) {
-        return [
-            'img' => base_url('image/' . $lagu['gambar']),
-            'name' => $lagu['nama_lagu'],
-            'artist' => $lagu['nama'],
-            'music' => base_url('song/' . $lagu['file_lagu']),
-        ];
-    }, $laguList)); ?>;
+    let musicList = <?= json_encode(array_map(function ($lagu) {
+                        return [
+                            'img' => base_url('image/' . $lagu['gambar']),
+                            'name' => $lagu['nama_lagu'],
+                            'artist' => $lagu['nama'],
+                            'music' => base_url('song/' . $lagu['file_lagu']),
+                        ];
+                    }, $laguList)); ?>;
 
     let currentTrackIndex = <?= array_search($currentLagu, $laguList); ?>;
 </script>

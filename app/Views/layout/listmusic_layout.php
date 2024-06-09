@@ -14,7 +14,7 @@
     <title><?= isset($pageTitle) ? $pageTitle : 'Lagu'; ?></title>
 </head>
 
-<body>
+<body style="background-color: rgb(21, 21, 21);">
     <?php include('inc/navlist.php') ?>
     <div>
         <?= $this->renderSection('content'); ?>

@@ -1,16 +1,15 @@
 body {
     width: 100%;
-    height: auto;
+    height: 100%;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
-    background: black;
+    
 }
 
 section{
     width: 100%;
     height: 100vh;
-    background-color: rgb(46, 46, 46);
 }
 
 
@@ -23,7 +22,7 @@ section{
 .contain{
     width: 100%;
     height: auto;
-    margin-top: 8vh;
+    margin-top: 8.5vh;
     display: flex;
     border-radius: 10px;
     background-color: rgb(35, 35, 35);
@@ -41,12 +40,8 @@ section{
 .column2{
     width: 50%;
     height: 50vh;
-    border: solid white;
     display: flex;
     padding: 1vw;
-  
-    
-
 }
 
 .play-song{
@@ -56,7 +51,6 @@ section{
 
 .incolumn2 {
     width: auto;
-    border: solid white;
     display: flex;
     align-items: center;
     
@@ -77,7 +71,8 @@ section{
 
 
 .incolumn1 img{
-    width: 600px;
+    width: 40vw;
+    height: 100%;
     object-fit: cover;
     border-radius: 10px;
     margin-right: 1vw;
@@ -88,6 +83,7 @@ section{
 table img{
     border-radius: 5px;
 }
+
 
 .contain2{
     width: 100%;
