@@ -12,7 +12,7 @@
                 <a class="nav-link active" aria-current="page" href=""><i class="bi bi-search"></i></a>
               </li>
    <li class="nav-item">
-                <a class="nav-link" href="logout.html"><i class="bi bi-gear"></i></a>
+                <a class="nav-link" onclick="return confirm('Apakah anda yakin ingin logout?');" href="<?= route_to('user.logout'); ?>"><i class="bi bi-gear"></i></a>
               </li>
             </ul>
           </div>

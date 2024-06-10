@@ -32,18 +32,18 @@
                     <tr data-index="<?= $index; ?>">
                         <th scope="row"><?= $index + 1; ?></th>
                         <td>
-                            <a href="<?= base_url('lagu/' . $l['id_artis'] . '/' . $l['id']); ?>" class="play-song">
+                            <a href="<?= route_to('user.lagu', $l['id_artis'], $l['id']); ?>" class="play-song">
                                 <img src="<?= base_url('image/' . $l['gambar']); ?>" alt="<?= $l['nama_lagu']; ?>" style="width: 50px;">
                             </a>
                         </td>
                         <td>
-                            <a href="<?= base_url('lagu/' . $l['id_artis'] . '/' . $l['id']); ?>" class="play-song">
+                            <a href="<?= route_to('user.lagu', $l['id_artis'], $l['id']); ?>" class="play-song">
                                 <?= $l['nama_lagu']; ?>
                             </a>
                         </td>
 
                         <td>
-                            <a href="<?= base_url('lagu/' . $l['id_artis'] . '/' . $l['id']); ?>" class="play-song">
+                            <a href="<?= route_to('user.lagu', $l['id_artis'], $l['id']); ?>" class="play-song">
                                 <?= $l['durasi']; ?>
                             </a>
                         </td>
@@ -53,6 +53,6 @@
 
         </table>
     </div>
-    </section>
+</section>
 
 <?= $this->endSection(); ?>

@@ -12,7 +12,7 @@
     <?php foreach ($artis as $a) : ?>
         <div class="card">
             <div class="cardpicture">
-                <a href="/artis/<?= $a['id_artis'] ?>">
+                <a href="<?= route_to('user.artis', $a['id_artis']) ?>">
                     <img src="<?= base_url('image/' . $a['picture']); ?>">
                 </a>
             </div>

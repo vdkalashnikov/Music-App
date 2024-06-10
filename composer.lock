@@ -4,8 +4,153 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "657ac079313fab046eb8c29fe1d6992b",
+    "content-hash": "e787096d48090869f307bef6adb9da63",
     "packages": [
+        {
+            "name": "4spacesdk/ci4authextension",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/4spacesdk/CI4AuthExtension.git",
+                "reference": "49ef0dda8f6524064fc1faba9232079eb057f396"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/4spacesdk/CI4AuthExtension/zipball/49ef0dda8f6524064fc1faba9232079eb057f396",
+                "reference": "49ef0dda8f6524064fc1faba9232079eb057f396",
+                "shasum": ""
+            },
+            "require": {
+                "4spacesdk/ci4debugtool": "^1.0",
+                "bshaffer/oauth2-server-php": "v1.13.0",
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "AuthExtension\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Hansen",
+                    "email": "martin@4spaces.dk"
+                }
+            ],
+            "description": "Easy OAuth2 integration with CodeIgniter 4",
+            "support": {
+                "issues": "https://github.com/4spacesdk/CI4AuthExtension/issues",
+                "source": "https://github.com/4spacesdk/CI4AuthExtension/tree/v1.0.1"
+            },
+            "time": "2023-08-21T13:45:40+00:00"
+        },
+        {
+            "name": "4spacesdk/ci4debugtool",
+            "version": "1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/4spacesdk/CI4DebugTool.git",
+                "reference": "f91c1429de616037248e2cf5d63d9e00945bbc41"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/4spacesdk/CI4DebugTool/zipball/f91c1429de616037248e2cf5d63d9e00945bbc41",
+                "reference": "f91c1429de616037248e2cf5d63d9e00945bbc41",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DebugTool\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Hansen",
+                    "email": "martin@4spaces.dk"
+                }
+            ],
+            "description": "Debug Tool for CodeIgniter 4",
+            "support": {
+                "issues": "https://github.com/4spacesdk/CI4DebugTool/issues",
+                "source": "https://github.com/4spacesdk/CI4DebugTool/tree/master"
+            },
+            "time": "2019-11-02T11:03:24+00:00"
+        },
+        {
+            "name": "bshaffer/oauth2-server-php",
+            "version": "v1.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bshaffer/oauth2-server-php.git",
+                "reference": "cd11527b29ceb340f24015b6df868c22908bcf12"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bshaffer/oauth2-server-php/zipball/cd11527b29ceb340f24015b6df868c22908bcf12",
+                "reference": "cd11527b29ceb340f24015b6df868c22908bcf12",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "aws/aws-sdk-php": "^2.8",
+                "firebase/php-jwt": "^2.2",
+                "mongodb/mongodb": "^1.1",
+                "phpunit/phpunit": "^7.5||^8.0",
+                "predis/predis": "^1.1",
+                "thobbs/phpcassa": "dev-master",
+                "yoast/phpunit-polyfills": "^1.0"
+            },
+            "suggest": {
+                "aws/aws-sdk-php": "~2.8 is required to use DynamoDB storage",
+                "firebase/php-jwt": "~2.2 is required to use JWT features",
+                "mongodb/mongodb": "^1.1 is required to use MongoDB storage",
+                "predis/predis": "Required to use Redis storage",
+                "thobbs/phpcassa": "Required to use Cassandra storage"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "OAuth2": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brent Shaffer",
+                    "email": "bshafs@gmail.com",
+                    "homepage": "http://brentertainment.com"
+                }
+            ],
+            "description": "OAuth2 Server for PHP",
+            "homepage": "http://github.com/bshaffer/oauth2-server-php",
+            "keywords": [
+                "auth",
+                "oauth",
+                "oauth2"
+            ],
+            "support": {
+                "issues": "https://github.com/bshaffer/oauth2-server-php/issues",
+                "source": "https://github.com/bshaffer/oauth2-server-php/tree/v1.13.0"
+            },
+            "time": "2022-10-12T17:33:08+00:00"
+        },
         {
             "name": "codeigniter4/framework",
             "version": "v4.5.1",
