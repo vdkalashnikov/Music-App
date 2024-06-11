@@ -125,6 +125,18 @@ h2{
     align-items: center;
     color: #00ccff;
 }
+#login_button button:hover{
+    border-radius: 4rem;
+    color: #0c1022;
+    background-color: #00ccff;
+    border: 1px solid #0c1022;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.3s;
+}
 
 .footer {
     margin-top: 30px;
@@ -135,7 +147,7 @@ h2{
 .footer a{
     text-decoration: none;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 1rem;
 }
 .glowIcon {
     text-shadow: 0 0 10px #00ccff;

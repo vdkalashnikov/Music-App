@@ -21,7 +21,7 @@ function updateGreeting() {
   const hour = now.getHours();
   let greeting;
 
-  if (hour < 12) {
+  if (hour < 11) {
       greeting = "Selamat Pagi";
   } else if (hour < 15) {
       greeting = "Selamat Siang";
