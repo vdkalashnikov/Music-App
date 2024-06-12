@@ -1,0 +1,120 @@
+body{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(18, 15, 15);
+    padding: 8px;
+}
+
+.section1{
+    margin-top: 10vh;
+    background-color: rgb(36, 36, 36);
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    justify-content: start;
+    border-radius: 10px;
+}
+.section2{
+    margin-top: 5vh;
+    background-color: rgb(36, 36, 36);
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+  
+}
+
+.cont1{
+    /* border: solid white; */
+    width: 30vw;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+form{
+    /* border: solid white; */
+    width: 450px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.isi{
+    width: 35vh;
+    height: auto;
+    /* border: solid white; */
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.form-label{
+    color: white;
+}
+
+.isi img{
+    width: 100%;
+    
+}
+
+.cont2{
+    width: 40vw;
+    height: 100%;
+    /* border: solid white; */
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   
+   
+}
+
+.user-name{
+    color: white;
+    font-size:5vh;
+}
+
+.user-fullname{
+    color: white;
+    font-size: 5vh;
+}
+.user-email{
+    color: white;
+    font-size: 5vh;
+    font-style: italic;
+}
+
+
+.name {
+    font-weight: 700;
+    color: white;
+    font-family: Verdana;
+  }
+
+.navbar{
+    background-color: rgb(33, 33, 33);
+}
+
+.bi-house{
+    color: white;
+  }
+
+.bi-search{
+    color: white;
+}
+.bi-person{
+    color: white;
+}
+  
+.bi-gear{
+    color: white;
+}
+  
+.bi-music-note-beamed{
+    color: white;
+}
+
+.bi-pencil{
+    color: white;
+    margin-left: 10px;
+}

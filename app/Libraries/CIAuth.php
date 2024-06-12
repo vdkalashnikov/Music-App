@@ -1,5 +1,6 @@
 <?php
 namespace App\Libraries;
+use App\Models\UserModel;
 
 class CiAuth
 {
@@ -77,7 +78,9 @@ class CiAuth
         $session = session();
         if ($session->has('logged_in')) {
             if ($session->has('userdata')) {
-                return $session->get('userdata');
+                // return $session->get('userdata');
+                $user = new UserModel();
+                return $user->asObject()->where('id', CiAuth::id())->first();
             } else {
                 return null;
             }

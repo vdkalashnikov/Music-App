@@ -13,7 +13,7 @@
 <body>
   <div class="login_form_container">
     <div class="login_form">
-      <h2>Login</h2>
+      <h2>Register</h2>
 
       <?php $validation = \Config\Services::validation(); ?>
       <form action="<?= route_to('user.save'); ?>" method="POST">

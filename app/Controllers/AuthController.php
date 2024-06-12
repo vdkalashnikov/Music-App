@@ -11,7 +11,7 @@ use Carbon\Carbon;
 
 class AuthController extends BaseController
 {
-    protected $helpers = ['url', 'form', 'CIMail'];
+    protected $helpers = ['url', 'form', 'CIMail', 'CIFunctions'];
     public function loginUserForm()
     {
         $data = [
@@ -83,7 +83,11 @@ class AuthController extends BaseController
             } else {
                 CiAuth::setCiAuth($userInfo); // Baris Penting
                 $username = $userInfo['username'];
+                $name = $userInfo['name'];
+                $picture = $userInfo['picture'];
                 session()->set('username', $username);
+                session()->set('name', $name);
+                session()->set('picture', $picture);
                 return redirect()->route('user.home');
             }
         }

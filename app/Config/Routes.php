@@ -14,6 +14,8 @@ use CodeIgniter\Router\RouteCollection;
         $routes->get('lagu/(:num)/(:num)', 'Home::lagu/$1/$2', ['as' => 'user.lagu']);
         $routes->get('api/songs', 'Home::getSongs');
         $routes->get('artis/(:num)', 'Home::artis/$1', ['as' => 'user.artis']);
+        $routes->get('profile', 'Home::profile', ['as' => 'user.profile']);
+        $routes->post('profile/update', 'Home::updateProfile', ['as' => 'user.profile.update']);
     });
 
     // Rute untuk pengguna yang belum login (guest)

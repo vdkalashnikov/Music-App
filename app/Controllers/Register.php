@@ -40,7 +40,7 @@ class Register extends BaseController
                 ]
             ],
             'username' => [
-                'rules' => 'required|min_length[3]|max_length[50]|is_unique[user.username]',
+                'rules' => 'required|min_length[4]|max_length[50]|is_unique[user.username]',
                 'errors' => [
                     'required' => 'Username diperlukan',
                     'min_length' => 'Username minimal 3 karakter',
