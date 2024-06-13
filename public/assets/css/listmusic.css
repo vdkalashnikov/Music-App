@@ -4,6 +4,7 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+    padding: 8px;
     
 }
 
@@ -89,6 +90,8 @@ table img{
     width: 100%;
     height: auto;
     margin-top: 1vh;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 

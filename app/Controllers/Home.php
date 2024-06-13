@@ -101,47 +101,97 @@ class Home extends BaseController
         $username = session()->get('username');
         $name = session()->get('name');
         $picture = session()->get('picture');
+        $bio = session()->get('bio');
 
         $data = [
             'pageTitle' => 'Profile',
             'username' => $username,
             'name' => $name,
             'picture' => $picture,
+            'bio' => $bio,
 
         ];
         return view('profile', $data);
     }
 
     public function updateProfile()
-{
-    $validation = \Config\Services::validation();
+    {
+        $validation = \Config\Services::validation();
 
-    $data = [
-        'name' => $this->request->getPost('name'),
-        'username' => $this->request->getPost('username'),
-        'bio' => $this->request->getPost('bio'),
-    ];
+        $data = [
+            'name' => $this->request->getPost('name'),
+            'username' => $this->request->getPost('username'),
+            'bio' => $this->request->getPost('bio'),
+        ];
 
-    $validation->setRules([
-        'name' => 'required|min_length[3]',
-        'username' => 'required|min_length[4]|is_unique[user.username,id,{id}]',
-        'bio' => 'max_length[255]',
-    ]);
+        $validation->setRules([
+            'name' => 'required|min_length[3]',
+            'username' => 'required|min_length[4]|is_unique[user.username,id,{id}]',
+            'bio' => 'max_length[255]',
+        ]);
 
-    if (!$validation->run($data)) {
-        return redirect()->route('user.profile')->with('fail', $validation->listErrors());
+        if (!$validation->run($data)) {
+            return redirect()->route('user.profile')->with('fail', $validation->listErrors());
+        }
+
+        $userModel = new UserModel();
+        $userId = CiAuth::id();
+
+        if ($userModel->update($userId, $data)) {
+            return redirect()->route('user.profile')->with('success', 'Profile berhasil diupdate.');
+        } else {
+            return redirect()->route('user.profile')->with('fail', 'Failed to update profile.');
+        }
     }
 
-    $userModel = new UserModel();
-    $userId = CiAuth::id();
+    public function updateProfilePicture(){
+        $request = \Config\Services::request();
+        $user_id = CiAuth::id();
+        $user = new UserModel();
+        $user_info = $user->asObject()->where('id', $user_id)->first();
 
-    if ($userModel->update($userId, $data)) {
-        return redirect()->route('user.profile')->with('success', 'Profile berhasil diupdate.');
-    } else {
-        return redirect()->route('user.profile')->with('fail', 'Failed to update profile.');
+        $path = 'imagepro/user/';
+        $file = $request->getFile('user_profile_file');
+        $old_picture = $user_info->picture;
+        $new_filename = 'UIMG'.$user_id.$file->getRandomName();
+
+        
+        $upload_image = \Config\Services::image()
+        ->withFile($file)
+        ->resize(450,450,true,'height')
+        ->save($path.$new_filename);
+
+        if( $upload_image ) {
+            if ( $old_picture != null && file_exists($path.$new_filename) ) {
+                unlink($path.$old_picture);
+            }
+
+            $user->where('id', $user_info->id)
+            ->set(['picture'=>$new_filename])
+            ->update();
+
+            echo json_encode(['status'=>1, 'msg'=>'Selesai!, Foto Profilmu telah diganti']);
+        } else {
+            echo json_encode(['status'=>0, 'msg'=>'Gagal, Foto Profilmu gagal diganti']);
+        }
     }
 }
-}
+
+// if( $file->move($path,$new_filename)) {
+        //     if ( $old_picture != null && file_exists($path.$old_picture)){
+        //         unlink($path.$old_picture);
+        //     }
+        //     $user->where('id', $user_info->id)
+        //     ->set(['picture'=>$new_filename])
+        //     ->update();
+
+        //     echo json_encode(['status'=>1, 'msg'=>'Selesai!, Foto Profilmu berhasil diganti']);
+        // } else {
+        //     echo json_encode(['status'=>0, 'msg'=>'Gagal, Foto Profilmu gagal diganti']);
+        // }
+
+
+        
 
 
 //     public function updateProfile()
@@ -250,5 +300,3 @@ class Home extends BaseController
 //         }
 //     }
 // }
-
-

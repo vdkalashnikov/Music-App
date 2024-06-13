@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="/assets/css/listmusic.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <script src="/assets/js/script.js" defer></script>
-    <link rel="shortcut icon" type="image/icon" href="/assets/img/musiclogoo.png"/>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" type="image/icon" href="/assets/img/musiclogoo.png" />
     <title><?= isset($pageTitle) ? $pageTitle : 'Lagu'; ?></title>
 </head>
 
@@ -20,4 +22,5 @@
         <?= $this->renderSection('content'); ?>
     </div>
 </body>
+
 </html>

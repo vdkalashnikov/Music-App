@@ -16,6 +16,7 @@ use CodeIgniter\Router\RouteCollection;
         $routes->get('artis/(:num)', 'Home::artis/$1', ['as' => 'user.artis']);
         $routes->get('profile', 'Home::profile', ['as' => 'user.profile']);
         $routes->post('profile/update', 'Home::updateProfile', ['as' => 'user.profile.update']);
+        $routes->post('update-profile-picture', 'Home::updateProfilePicture', ['as' => 'user.update.picture']);
     });
 
     // Rute untuk pengguna yang belum login (guest)

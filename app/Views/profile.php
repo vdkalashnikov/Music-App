@@ -5,9 +5,9 @@
 <section class="section1">
     <div class="cont1">
         <div class="isi">
-            <img src="<?= get_user()->picture == null ? '/imagepro/user/default_avatar.png' : '/imagepro/user' . get_user()->picture ?>" alt="">
+            <img src="<?= get_user()->picture == null ? '/imagepro/user/default_avatar.png' : '/imagepro/user/' . get_user()->picture ?>" class="avatar-photo" alt="">
         </div>
-        <a href="javascript::" onclick="event.preventDefault();document.getElementById('user_profile_file').click();"><i class="bi bi-pencil"></i></a>
+        <a href="javascript:;" onclick="event.preventDefault();document.getElementById('user_profile_file').click();"><i class="bi bi-pencil"></i></a>
         <input type="file" name="user_profile_file" id="user_profile_file" class="d-none" style="opacity: 0;">
     </div>
     <div class="cont2">
@@ -21,6 +21,9 @@
         </p>
         <p class="user-email">
             <?= get_user()->email; ?>
+        </p>
+        <p class="user-bio">
+            <?= get_user()->bio; ?>
         </p>
     </div>
 </section>
@@ -86,6 +89,31 @@
         });
     });
 </script>
+
+<?= $this->section('scripts'); ?>
+<script>
+      $('#user_profile_file').ijaboCropTool({
+          preview : '.avatar-photo',
+          setRatio:1,
+          allowedExtensions: ['jpg', 'jpeg','png'],
+          processUrl:'<?= route_to('user.update.picture'); ?>',
+          withCSRF:['<?= csrf_token() ?>','<?= csrf_hash() ?>'],
+          onSuccess:function(message, element, status){
+            if ( status == 1) {
+                toastr.success(message);
+            } else {
+                toastr.error(message);
+            }
+            // alert(message);
+          },
+          onError:function(message, element, status){
+            alert(message);
+          }
+      });
+         
+  </script>
+  
+  <?= $this->endSection(); ?>
 
 
 <!-- <script>
