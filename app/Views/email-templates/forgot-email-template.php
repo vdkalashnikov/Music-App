@@ -3,7 +3,7 @@
 </p>
 
 <p>
-    Kami telah menerima permintaan untuk mereset password untuk admin upa-tik dengan akun yang terhubung <i>
+    Kami telah menerima permintaan untuk mereset password Music App dengan akun yang terhubung <i>
         <?= $email_data['user']->email; ?>
     </i>
     kamu bisa mereset password dengan menekan tombol di bawah:

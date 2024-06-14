@@ -17,6 +17,7 @@ use CodeIgniter\Router\RouteCollection;
         $routes->get('profile', 'Home::profile', ['as' => 'user.profile']);
         $routes->post('profile/update', 'Home::updateProfile', ['as' => 'user.profile.update']);
         $routes->post('update-profile-picture', 'Home::updateProfilePicture', ['as' => 'user.update.picture']);
+        $routes->post('change-password', 'Home::changePassword', ['as' => 'user.change.password']);
     });
 
     // Rute untuk pengguna yang belum login (guest)

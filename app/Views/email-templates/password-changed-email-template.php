@@ -3,7 +3,7 @@
 </p>
 
 <p>
-    Password mu pada sistem upa-tik telah berhasil diubah, ini adalah kredensial baru login mu:
+    Password mu pada web Music App telah berhasil diubah, ini adalah kredensial baru login mu:
     <br><br>
     <b>Login ID:
         <?= $mail_data['user']->username; ?> or
@@ -15,7 +15,7 @@
     </b>
 </p>
 <br><br>
-Dimohon untuk menjaga akun anda, username dan password anda dan akun anda jangan pernah di beritahu orang lain.
+Dimohon untuk menjaga akun anda, username dan password anda jangan pernah diberitahu kepada orang lain.
 <p>
     Music App
 </p>

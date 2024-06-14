@@ -29,6 +29,8 @@
 </section>
 
 <section class="section2">
+    <div class="insect">
+        <header><h2>Ubah Profil</h2></header>
     <?php $validation = \Config\Services::validation(); ?>
     <form action="<?= route_to('user.profile.update'); ?>" method="POST" id="personal_details_form">
         <?= csrf_field(); ?>
@@ -78,6 +80,39 @@
 
         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
     </form>
+    </div>
+    <div class="insect">
+    <header><h2>Ubah Password</h2></header>
+   
+    <form action="<?= route_to('user.change.password'); ?>" method="POST" id="change_password_form">
+        <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
+        <?= csrf_field(); ?>
+    
+
+        <div class="mb-2">
+            <label for="exampleInputEmail1" class="form-label">Password Sebelumnya</label>
+            <input type="password" class="form-control" id="exampleInputpassword" placeholder="Password Sebelumnya..." name="current_password" >
+            <span class="text-danger error-text current_password_error"></span>
+        </div>
+       
+
+        <div class="mb-2">
+            <label for="exampleInputPassword1" class="form-label">Password Baru</label>
+            <input type="password" class="form-control" id="exampleInputUserpassword" placeholder="Password Baru..." name="new_password" >
+            <span class="text-danger error-text new_password_error"></span>
+        </div>
+      
+        <div class="mb-2">
+            <label for="exampleInputPassword1" class="form-label">Konfirmasi Password Baru</label>
+            <input type="password" class="form-control" id="exampleInputUserpassword" placeholder="Konfirmasi Password Baru..." name="confirm_new_password" >
+            <span class="text-danger error-text confirm_new_password_error"></span>
+        </div>
+     
+
+        <button type="submit" class="btn btn-primary">Ubah Password</button>
+    </form>
+    </div>
+    
 </section>
 
 <?= $this->endSection(); ?>
@@ -110,6 +145,46 @@
             alert(message);
           }
       });
+
+      $('#change_password_form').on('submit', function(e) {
+            e.preventDefault();
+
+            var csrfName = $('.ci_csrf_data').attr('name');
+            var csrfHash = $('.ci_csrf_data').val();
+            var form = this;
+            var formData = new FormData(form);
+            formData.append(csrfName, csrfHash);
+
+            $.ajax({
+                url: $(form).attr('action'),
+                method: $(form).attr('method'),
+                data: formData,
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                cache: false,
+                beforeSend: function() {
+                    toastr.remove();
+                    $(form).find('span.error-text').text('');
+                },
+                success: function(response) {
+                    $('.ci_csrf_data').val(response.token);
+
+                    if ($.isEmptyObject(response.error)) {
+                        if (response.status == 1) {
+                            $(form)[0].reset();
+                            toastr.success(response.msg);
+                        } else {
+                            toastr.error(response.msg);
+                        }
+                    } else {
+                        $.each(response.error, function(prefix, val) {
+                            $(form).find('span.' + prefix + '_error').text(val);
+                        });
+                    }
+                }
+            });
+        });
          
   </script>
   
