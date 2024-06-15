@@ -23,7 +23,7 @@
 </head>
 
 <body>
-<?php include('inc/navsong.php') ?>
+<!-- <?php include('inc/navsong.php') ?> -->
 <div>
 <?= $this->renderSection('content'); ?>
 </div>

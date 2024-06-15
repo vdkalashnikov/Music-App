@@ -61,8 +61,8 @@
           <button type="submit" value="Login">Submit</button>
         </div>
         <div class="footer">
-          <a href="<?= route_to('user.forgot.password'); ?>">Forgot Password ?</a>
-          <a href="<?= route_to('user.register'); ?>">SignUp</a>
+          <a id="forgot" href="<?= route_to('user.forgot.password'); ?>">Forgot Password ?</a>
+          <a id="sign" href="<?= route_to('user.register'); ?>">SignUp</a>
         </div>
       </form>
     </div>

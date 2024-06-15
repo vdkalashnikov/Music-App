@@ -199,4 +199,6 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
+
+    public $validHosts = ['192.168.43.219'];
 }

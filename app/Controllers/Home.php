@@ -101,6 +101,7 @@ class Home extends BaseController
     {
         $username = session()->get('username');
         $name = session()->get('name');
+        $email = session()->get('email');
         $picture = session()->get('picture');
         $bio = session()->get('bio');
 
@@ -108,6 +109,7 @@ class Home extends BaseController
             'pageTitle' => 'Profile',
             'username' => $username,
             'name' => $name,
+            'email' => $email,
             'picture' => $picture,
             'bio' => $bio,
 
@@ -122,12 +124,14 @@ class Home extends BaseController
         $data = [
             'name' => $this->request->getPost('name'),
             'username' => $this->request->getPost('username'),
+            'email' => $this->request->getPost('email'),
             'bio' => $this->request->getPost('bio'),
         ];
 
         $validation->setRules([
-            'name' => 'required|min_length[3]',
-            'username' => 'required|min_length[4]|is_unique[user.username,id,{id}]',
+            'name' => 'required|min_length[3]|max_length[50]',
+            'username' => 'required|min_length[4]|is_unique[user.username,id,{id}]|max_length[50]',
+            'email' => 'required|min_length[4]|is_unique[user.email,id,{id}]',
             'bio' => 'max_length[255]',
         ]);
 

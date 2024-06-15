@@ -49,10 +49,11 @@ class Register extends BaseController
                 ]
             ],
             'password' => [
-                'rules' => 'required|min_length[8]',
+                'rules' => 'required|min_length[8]|max_length[255]',
                 'errors' => [
                     'required' => 'Password diperlukan',
-                    'min_length' => 'Password minimal 8 karakter'
+                    'min_length' => 'Password minimal 8 karakter',
+                    'max_length' => 'Password terlalu panjang'
                 ]
             ],
             'confirm_password' => [

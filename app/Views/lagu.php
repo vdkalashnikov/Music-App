@@ -3,7 +3,8 @@
 
 <div class="player">
     <div class="wrapper">
-        <div class="details">
+    <a id="back" href="<?= route_to('user.artis', $artis['id_artis']); ?>"><i class="bi bi-music-note-list"></i></a>
+        <div class="details">     
             <div class="now-playing">PLAYING x OF y</div>
             <div class="track-art" style="background-image: url('<?= base_url('image/' . $currentLagu['gambar']); ?>');"></div>
             <div class="track-name"><?= $currentLagu['nama_lagu']; ?></div>

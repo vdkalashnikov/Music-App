@@ -4,6 +4,7 @@
 <div class="message">
   <h2 id="greeting"></h2>
 </div>
+<div class="swal" data-swal="<?= session('success'); ?>"></div>
 <hr>
 <div class="artitle">
   <p>Artis Terpopuler</p>
@@ -40,4 +41,22 @@
 <br>
 
 
+<?= $this->endSection(); ?>
+
+<?= $this->section('scripts'); ?>
+<script>
+    const swalElement = document.querySelector('.swal'); // Mengambil elemen dengan kelas '.swal'
+    const swalData = swalElement.dataset.swal; // Mengambil data dari atribut data HTML 'data-swal'
+
+    if (swalData) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil',
+            text: swalData,
+            showConfirmButton: false,
+            timer: 1900
+        });
+    }
+    
+</script>
 <?= $this->endSection(); ?>

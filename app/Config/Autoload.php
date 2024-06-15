@@ -4,6 +4,8 @@ namespace Config;
 
 use CodeIgniter\Config\AutoloadConfig;
 
+$autoload = [];
+$autoload['libraries'] = ['session'];
 /**
  * -------------------------------------------------------------------
  * AUTOLOADER CONFIGURATION

@@ -88,7 +88,7 @@ form{
 .isi{
     width: 35vh;
     height: auto;
-    /* border: solid white; */
+    border: solid white;
     border-radius: 50%;
     overflow: hidden;
 }
@@ -106,16 +106,16 @@ form{
 
 .user-name{
     color: white;
-    font-size:5vh;
+    font-size:4vh;
 }
 
 .user-fullname{
     color: white;
-    font-size: 5vh;
+    font-size: 4vh;
 }
 .user-email{
     color: white;
-    font-size: 4vh;
+    font-size: 3vh;
     font-style: italic;
 }
 .user-bio{

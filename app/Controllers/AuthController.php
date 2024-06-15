@@ -88,7 +88,7 @@ class AuthController extends BaseController
                 session()->set('username', $username);
                 session()->set('name', $name);
                 session()->set('picture', $picture);
-                return redirect()->route('user.home');
+                return redirect()->route('user.home')->with('success', "Selamat Datang {$userInfo['name']}");
             }
         }
     }

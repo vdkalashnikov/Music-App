@@ -39,7 +39,7 @@ class CIFilter implements FilterInterface
 
         if ($arguments[0] == 'auth') {
             if (!CiAuth::check()) {
-                return redirect()->route('user.login.form')->with('fail', 'Anda Harus login terlebih dahulu!');
+                return redirect()->route('user.login.form')->with('fail', 'Anda harus login terlebih dahulu!');
             }
         }
         // if ($arguments[0] == 'login') {

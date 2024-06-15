@@ -3,21 +3,24 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background: linear-gradient(to right,#9a1d86, #1595be);
     font-weight: bold;
-    width: 100%;
-    height: 100%;
     padding: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
     
     }
     
     .player{
-      height: 95vh;
+      height: auto;
       display: flex;
       align-items: center;
       flex-direction: column;
       justify-content: center;
+      
   }
     .wrapper{
       border: 1px solid transparent;
@@ -25,6 +28,7 @@ body {
       border-radius: 20px;
       background-color: #ddd;
       box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+      
     }
     
     .details {
@@ -171,7 +175,7 @@ body {
         }
     }
     .loader {
-      height: 70px;
+      height: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -217,3 +221,8 @@ body {
         animation-delay: 0s;
     }
     
+    #back .bi-music-note-list{
+      color: black;
+      position: absolute;
+      margin-left: 5px;
+    }
