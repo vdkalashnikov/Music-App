@@ -34,35 +34,37 @@ body {
 }
 
 .card {
-    width: 270px;
-    height: 280px;
+  width: 230px;
+    /* 270px */
+    height: auto;
     background-color: transparent;
     display: flex;
     justify-content: center;
+    
     border-style: outset;
     border-color: rgb(255, 255, 255);
     border-radius: 15px;
     overflow: hidden;
+    
+    padding: 10px;
 }
 
 .cardpicture{
-  width: 270px;
+  width: auto;
   height: auto;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 .cardpicture2{
-  width: 270px;
+  width: auto;
   height: auto;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
 .cardpicture img{
-  width: 230px;
-  height: 230px;
+  width: 200px;
+  height: 200px;
     object-fit: cover;
     border-radius: 50%;
     /* border: 3px solid #fff; */
@@ -70,25 +72,38 @@ body {
 }
 
 .cardpicture2 img{
-  width: 230px;
-  height: 230px;
+  width: 200px;
+  height: 200px;
     object-fit: cover;
     border-radius: 5%;
     /* border: 3px solid #fff; */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.namealbum{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 1vh;
+  text-align: left;
+  color: rgb(246, 246, 246);
+  padding-left: 0.5vh;
+  font-size: 15px;
+  font-weight: 600;
+  height: auto;
+  /* position: absolute; */
+  
+}
 
 .nameart{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin-top: 1vh;
   text-align: left;
   color: rgb(246, 246, 246);
-  padding-left: 3vh;
+  padding-left: 0.5vh;
   font-size: 15px;
   font-weight: 600;
   height: auto;
 }
+
 
 .name {
   font-weight: 700;

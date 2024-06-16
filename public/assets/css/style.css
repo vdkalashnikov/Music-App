@@ -1,9 +1,11 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(to right,#9a1d86, #1595be);
+    background: linear-gradient(to right,#272627, #091e25);
+    /* background: linear-gradient(to right,#9a1d86, #1595be); */
     font-weight: bold;
-    padding: 5%;
+    /* padding: 5%; */
+    padding-bottom: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +26,8 @@ body {
   }
     .wrapper{
       border: 1px solid transparent;
-      padding: 30px;
+      padding: 7%;
+      /* padding: 30px; */
       border-radius: 20px;
       background-color: #ddd;
       box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
@@ -85,7 +88,10 @@ body {
     .playpause-track,
     .prev-track,
     .next-track {
-    padding: 25px;
+    padding-right: 4%;
+    padding-left: 4%;
+    padding-bottom: 1%;
+    /* padding: 25px; */
     opacity: 0.8;
     transition: opacity .2s;
     }

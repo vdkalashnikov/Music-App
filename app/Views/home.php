@@ -27,14 +27,15 @@
   <p>Album Terpopuler</p>
 </div>
 <div class="carousel">
-  <?php foreach ($artis as $a) : ?>
+  <?php foreach ($album as $ab) : ?>
     <div class="card">
       <div class="cardpicture2">
-        <a href="">
-          <img src="<?= base_url('image/' . $a['picture']); ?>">
+        <a href="<?= route_to('user.album', $ab['id_album']) ?>">
+          <img src="<?= base_url('img_album/' . $ab['gambar_album']); ?>">
         </a>
       </div>
-      <div class="nameart"><?= $a['nama']; ?></div>
+      <div class="namealbum"><?= $ab['nama_album']; ?></div>
+      <div class="nameart"><?= $ab['nama']; ?></div>
     </div>
   <?php endforeach; ?>
 </div>

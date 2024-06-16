@@ -1,11 +1,10 @@
-body {
+body{
     width: 100%;
     height: 100%;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
     padding: 1%;
-    
 }
 
 section{
@@ -13,76 +12,69 @@ section{
     height: auto;
 }
 
-
-.name {
-    font-weight: 700;
-    color: white;
-    font-family: Verdana;
-  }
-
 .contain{
     width: 100%;
     height: auto;
-    margin-top: 8.5vh;
     display: flex;
     flex-wrap: wrap;
+    margin-top: 8.5vh;
     border-radius: 10px;
     background-color: rgb(35, 35, 35);
     padding: 1vh;
+    border: solid blue;
 }
 
 .column1{
-    width: auto;
+    width: 100%;
     height: auto;
     flex-grow: 1;
     flex-basis: 350px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: solid white;
+    padding: 15px;
 }
+
 .column2{
-    width: auto;
-    height: 100%;
+    width: 100%;
+    height: auto;
     flex-grow: 1;
     flex-basis: 350px;
     display: flex;
     padding: 1vh;
+    border: solid white;
     /* border: solid white; */
 }
 
-.play-song{
-    text-decoration: none;
-    color: white;
-}
-
-.incolumn2 {
-    width: auto;
-    display: flex;
-}
-
-.incolumn2 h2{
-    font-size: 40px;
-    color: white;
-}
-
 .incolumn1{
-    width: 100%;
+    width: 35vh;
     height: auto;
     overflow: hidden;
     border-radius: 10px;
+    border: solid white;
+    display: flex;
+    justify-content: center;
 }
-
 
 .incolumn1 img{
     width: 100%;
-
-   
 }
 
-table img{
-    border-radius: 5px;
+.incolumn2 {
+    width: 100%;
+    display: flex;
+    border: solid white;
+    flex-direction: column;
 }
 
+#albumname{
+    font-size: 4rem
+}
+
+.incolumn2 h2{
+    color: white;
+}
 
 .contain2{
     width: 100%;
@@ -93,15 +85,11 @@ table img{
 }
 
 
-
-
-
-
-
-
-
-
-
+.name {
+    font-weight: 700;
+    color: white;
+    font-family: Verdana;
+  }
 
 .navbar{
     background-color: rgb(33, 33, 33);

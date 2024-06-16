@@ -6,6 +6,7 @@ use App\Models\ArtisModel;
 use App\Models\LaguModel;
 use App\Libraries\CiAuth;
 use App\Models\UserModel;
+use App\Models\AlbumModel;
 use CodeIgniter\Validation\Exceptions\ValidationException;
 use App\Libraries\Hash;
 
@@ -16,8 +17,11 @@ class Home extends BaseController
     {
         $laguModel = new LaguModel();
         $artisModel = new ArtisModel();
+        $albumModel = new AlbumModel();
+        
 
         $artis = $artisModel->findAll();
+        $album = $albumModel->jointoArtis()->findAll();
 
         $username = session()->get('username');
         session()->set('username', $username);
@@ -25,6 +29,7 @@ class Home extends BaseController
             'pageTitle' => 'Dashboard',
             'username' => $username,
             'artis' => $artis,
+            'album' => $album
 
         ];
 
@@ -36,6 +41,7 @@ class Home extends BaseController
     {
         $laguModel = new LaguModel();
         $artisModel = new ArtisModel();
+        $albumModel = new AlbumModel();
 
         if ($id_artis !== null) {
             $laguList = $laguModel->getLaguListByArtis($id_artis);
@@ -46,6 +52,9 @@ class Home extends BaseController
             $currentLagu = null;
             $artis = null;
         }
+        
+        
+
 
         // Membuat pageTitle dengan nama artis dan nama lagu
         if ($artis !== null && $currentLagu !== null) {
@@ -56,10 +65,11 @@ class Home extends BaseController
             $pageTitle = "Lagu";
         }
 
+       
         $data = [
-            'laguList' => $laguList,
+            'laguList' => $laguList,    
             'currentLagu' => $currentLagu,
-            'artis' => $artis,
+            'artis' => $artis,  
             'pageTitle' => $pageTitle
         ];
         return view('lagu', $data);
@@ -69,7 +79,7 @@ class Home extends BaseController
     public function getSongs()
     {
         $laguModel = new LaguModel();
-        $lagu = $laguModel->joinArtis()->findAll();
+        $lagu = $laguModel->joinArtis()->joinAlbum()->findAll();
 
         return $this->response->setJSON($lagu);
     }
@@ -90,6 +100,26 @@ class Home extends BaseController
 
         return view('listmusicart', $data);
     }
+    public function album($id_album)
+{
+    $albumModel = new AlbumModel();
+    $artisModel = new ArtisModel();
+    // Fetching the album details along with the artist's name
+    $album = $albumModel->jointoArtis()->where('album.id_album', $id_album)->first();
+
+    $laguModel = new LaguModel();
+    $lagu = $laguModel->getLaguListByAlbum($id_album);
+
+    $data = [
+        'album' => $album,
+        'lagu' => $lagu,
+        'artis' => $artisModel,
+        'pageTitle' => isset($album['nama_album']) ? $album['nama_album'] : 'Album'
+    ];
+
+    return view('listmusicalbum', $data);
+}
+
 
     public function logoutUserHandler()
     {
@@ -249,6 +279,26 @@ class Home extends BaseController
         }
     }
 }
+
+
+// if ($id_album !== null) {
+//     $laguListt = $laguModel->getLaguListByAlbum($id_album);
+//     $currenttLagu = $laguModel->getLaguByIdLagu($id_lagu);
+//     $album = $albumModel->find($id_album);
+// } else {
+//     $laguListt = [];
+//     $currenttLagu = null;
+//     $album = null;
+// }
+
+
+ // if ($album !== null && $currenttLagu !== null) {
+        //     $pageTitle = $album['nama_album'] . " - " . $currenttLagu['nama_lagu'];
+        // } elseif ($currenttLagu !== null) {
+        //     $pageTitle = $currenttLagu['nama_lagu'];
+        // } else {
+        //     $pageTitle = "Lagu";
+        // }
 
 // if( $file->move($path,$new_filename)) {
         //     if ( $old_picture != null && file_exists($path.$old_picture)){
