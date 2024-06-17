@@ -3,7 +3,11 @@
 
 <div class="player">
     <div class="wrapper">
-    <a id="back" href="<?= route_to('user.artis', $artis['id_artis']); ?>"><i class="bi bi-music-note-list"></i></a>
+    <?php if ($artis): ?>
+            <a id="back" href="<?= route_to('user.artis', $artis['id_artis']); ?>"><i class="bi bi-music-note-list"></i></a>
+        <?php elseif ($album): ?>
+            <a id="back" href="<?= route_to('user.album', $album['id_album']); ?>"><i class="bi bi-music-note-list"></i></a>
+        <?php endif; ?>
         <div class="details">     
             <div class="now-playing">PLAYING x OF y</div>
             <div class="track-art" style="background-image: url('<?= base_url('image/' . $currentLagu['gambar']); ?>');"></div>

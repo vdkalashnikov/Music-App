@@ -11,7 +11,11 @@
         <div class="column2">
             <div class="incolumn2">
                 <h2 id="albumname"><?= $album['nama_album']; ?></h2>
-                <h2><?= $album['nama']; ?></h2>
+                <div class="isiincolumn2">
+                    <img src="<?= base_url('image/' . $album['picture']); ?>" alt="<?= $album['nama']; ?>">
+                    <h2><?= $album['nama']; ?> . <?= $jumlahLagu; ?> Lagu, <?= $totalDuration; ?></h2>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -27,20 +31,27 @@
                 </tr>
             </thead>
             <tbody>
-            <?php foreach ($lagu as $index => $l) : ?>
-                <tr  data-index="<?= $index; ?>">
-                    <th scope="row">1</th>
-                    <td><img src="<?= base_url('image/' . $l['gambar']); ?>" alt="<?= $l['nama_lagu']; ?>" style="width: 50px;">
-                </td>
-                    <td>
-                    <?= $l['nama_lagu']; ?>
-                    </td>
-                    <td>
-                    <?= $l['durasi']; ?>
-                    </td>
-                </tr>
-            </tbody>
-            <?php endforeach ?>
+<?php foreach ($lagu as $index => $l) : ?>
+    <tr data-index="<?= $index; ?>">
+        <th scope="row"><?= $index + 1; ?></th>
+        <td>
+            <a href="<?= route_to('user.lagu.album', $album['id_album'], $l['id']); ?>">
+                <img src="<?= base_url('image/' . $l['gambar']); ?>" alt="<?= $l['nama_lagu']; ?>" style="width: 50px;">
+            </a>
+        </td>
+        <td>
+            <a href="<?= route_to('user.lagu.album', $album['id_album'], $l['id']); ?>">
+            <?= $l['nama_lagu']; ?>
+            </a>
+        </td>
+        <td>
+            <a href="<?= route_to('user.lagu.album', $album['id_album'], $l['id']); ?>">
+            <?= $l['durasi']; ?>
+            </a>
+        </td>
+    </tr>
+<?php endforeach ?>
+</tbody>
         </table>
     </div>
 </section>

@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         updateTimer = setInterval(setUpdate, 1000);
 
         currTrack.addEventListener('ended', nextTrack);
-        randomBgColor();
+        // randomBgColor();
     }
 
     // function randomBgColor() {
@@ -115,9 +115,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
         } else {
             trackIndex = 0;
         }
+        console.log("Next track index:", trackIndex); // Debug log
         loadTrack(trackIndex);
-        playTrack();
+        playTrack(); // Ensure this is called
     }
+    
 
     function prevTrack() {
         if (trackIndex > 0) {

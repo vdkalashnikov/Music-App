@@ -11,9 +11,7 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="<?= route_to('user.home'); ?>"><i class="bi bi-house"></i></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="<?= route_to('user.artis', $artis['id_artis']); ?>"><i class="bi bi-music-note-list"></i></a>
-        </li>
+        
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="<?= route_to('user.profile'); ?>"><i class="bi bi-person"></i></i></a>
         </li>

@@ -41,9 +41,10 @@ body {
     display: flex;
     justify-content: center;
     
-    border-style: outset;
-    border-color: rgb(255, 255, 255);
+    /* border-style: outset; */
+    /* border-color: rgb(255, 255, 255); */
     border-radius: 15px;
+    border-style: none;
     overflow: hidden;
     
     padding: 10px;

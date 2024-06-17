@@ -18,7 +18,7 @@ class Home extends BaseController
         $laguModel = new LaguModel();
         $artisModel = new ArtisModel();
         $albumModel = new AlbumModel();
-        
+
 
         $artis = $artisModel->findAll();
         $album = $albumModel->jointoArtis()->findAll();
@@ -52,11 +52,7 @@ class Home extends BaseController
             $currentLagu = null;
             $artis = null;
         }
-        
-        
 
-
-        // Membuat pageTitle dengan nama artis dan nama lagu
         if ($artis !== null && $currentLagu !== null) {
             $pageTitle = $artis['nama'] . " - " . $currentLagu['nama_lagu'];
         } elseif ($currentLagu !== null) {
@@ -65,11 +61,45 @@ class Home extends BaseController
             $pageTitle = "Lagu";
         }
 
-       
         $data = [
-            'laguList' => $laguList,    
+            'laguList' => $laguList,
             'currentLagu' => $currentLagu,
-            'artis' => $artis,  
+            'artis' => $artis,
+            'album' => null, // tambahkan ini untuk memudahkan pengecekan di view
+            'pageTitle' => $pageTitle
+        ];
+        return view('lagu', $data);
+    }
+
+
+    public function laguByAlbum($id_album = null, $id_lagu = null)
+    {
+        $laguModel = new LaguModel();
+        $albumModel = new AlbumModel();
+
+        if ($id_album !== null) {
+            $laguList = $laguModel->getLaguListByAlbum($id_album);
+            $currentLagu = $laguModel->getLaguById($id_lagu);
+            $album = $albumModel->jointoArtis()->find($id_album);
+        } else {
+            $laguList = [];
+            $currentLagu = null;
+            $album = null;
+        }
+
+        if ($album !== null && $currentLagu !== null) {
+            $pageTitle = $album['nama_album'] . " - " . $currentLagu['nama_lagu'];
+        } elseif ($currentLagu !== null) {
+            $pageTitle = $currentLagu['nama_lagu'];
+        } else {
+            $pageTitle = "Lagu";
+        }
+
+        $data = [
+            'laguList' => $laguList,
+            'currentLagu' => $currentLagu,
+            'album' => $album,
+            'artis' => null,
             'pageTitle' => $pageTitle
         ];
         return view('lagu', $data);
@@ -101,24 +131,28 @@ class Home extends BaseController
         return view('listmusicart', $data);
     }
     public function album($id_album)
-{
-    $albumModel = new AlbumModel();
-    $artisModel = new ArtisModel();
-    // Fetching the album details along with the artist's name
-    $album = $albumModel->jointoArtis()->where('album.id_album', $id_album)->first();
+    {
+        $albumModel = new AlbumModel();
+        $artisModel = new ArtisModel();
+        // Fetching the album details along with the artist's name
+        $album = $albumModel->jointoArtis()->where('album.id_album', $id_album)->first();
 
-    $laguModel = new LaguModel();
-    $lagu = $laguModel->getLaguListByAlbum($id_album);
+        $laguModel = new LaguModel();
+        $lagu = $laguModel->getLaguListByAlbum($id_album);
+        $jumlahLagu = $laguModel->countLaguByAlbum($id_album);
+        $totalDuration = $laguModel->getTotalDurationByAlbum($id_album);
 
-    $data = [
-        'album' => $album,
-        'lagu' => $lagu,
-        'artis' => $artisModel,
-        'pageTitle' => isset($album['nama_album']) ? $album['nama_album'] : 'Album'
-    ];
+        $data = [
+            'album' => $album,
+            'lagu' => $lagu,
+            'artis' => $artisModel,
+            'jumlahLagu' => $jumlahLagu,
+            'totalDuration' => $totalDuration, 
+            'pageTitle' => isset($album['nama_album']) ? $album['nama_album'] : 'Album'
+        ];
 
-    return view('listmusicalbum', $data);
-}
+        return view('listmusicalbum', $data);
+    }
 
 
     public function logoutUserHandler()

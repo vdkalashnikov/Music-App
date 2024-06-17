@@ -17,8 +17,8 @@ class AlbumModel extends Model
 
     public function jointoArtis()
     {
-        return $this->select('album.*, artis.nama as nama')
-                    ->join('artis', 'artis.id_artis = album.id_artis', 'left');
+        return $this->select('album.*, artis.nama as nama, artis.picture')
+            ->join('artis', 'artis.id_artis = album.id_artis', 'left');
     }
-}
 
+}

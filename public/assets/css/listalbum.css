@@ -21,7 +21,7 @@ section{
     border-radius: 10px;
     background-color: rgb(35, 35, 35);
     padding: 1vh;
-    border: solid blue;
+    /* border: solid blue; */
 }
 
 .column1{
@@ -32,7 +32,7 @@ section{
     display: flex;
     align-items: center;
     justify-content: center;
-    border: solid white;
+    /* border: solid white; */
     padding: 15px;
 }
 
@@ -43,7 +43,6 @@ section{
     flex-basis: 350px;
     display: flex;
     padding: 1vh;
-    border: solid white;
     /* border: solid white; */
 }
 
@@ -52,7 +51,7 @@ section{
     height: auto;
     overflow: hidden;
     border-radius: 10px;
-    border: solid white;
+    /* border: solid white; */
     display: flex;
     justify-content: center;
 }
@@ -64,9 +63,10 @@ section{
 .incolumn2 {
     width: 100%;
     display: flex;
-    border: solid white;
+    /* border: solid white; */
     flex-direction: column;
 }
+
 
 #albumname{
     font-size: 4rem
@@ -75,6 +75,24 @@ section{
 .incolumn2 h2{
     color: white;
 }
+.isiincolumn2 h2{
+    color: white;
+    margin-left: 1rem;
+}
+
+.isiincolumn2{
+    display: flex;
+    justify-content: start;
+    padding-left: 3px;
+    align-items: center;
+    /* border: solid white; */
+}
+
+.isiincolumn2 img{
+    width: 45px;
+    height: auto;
+    border-radius: 3px;
+}
 
 .contain2{
     width: 100%;
@@ -82,6 +100,14 @@ section{
     margin-top: 1vh;
     border-radius: 10px;
     overflow: hidden;
+}
+
+td a{
+    color: white;
+    text-decoration: none;
+}
+table img{
+    border-radius: 5px;
 }
 
 

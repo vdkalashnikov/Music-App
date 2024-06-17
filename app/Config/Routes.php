@@ -12,6 +12,8 @@ use CodeIgniter\Router\RouteCollection;
         $routes->get('home', 'Home::index', ['as' => 'user.home']);
         $routes->get('logout', 'Home::logoutUserHandler', ['as' => 'user.logout']);
         $routes->get('lagu/(:num)/(:num)', 'Home::lagu/$1/$2', ['as' => 'user.lagu']);
+        $routes->get('lagu_album/(:num)/(:num)', 'Home::laguByAlbum/$1/$2', ['as' => 'user.lagu.album']);
+
         $routes->get('api/songs', 'Home::getSongs');
         $routes->get('artis/(:num)', 'Home::artis/$1', ['as' => 'user.artis']);
         $routes->get('album/(:num)', 'Home::album/$1', ['as' => 'user.album']);
