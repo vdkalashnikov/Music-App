@@ -13,6 +13,7 @@ body{
     letter-spacing: 1px;
     background-color: #5c5f6e;
     color: rgb(217, 51, 51);
+    padding: 5px;
 }
 .form {
     display: flex;
