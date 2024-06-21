@@ -12,16 +12,21 @@ use App\Libraries\Hash;
 
 class Home extends BaseController
 {
-    protected $helpers = ['url', 'form', 'CIMail', 'CIFunctions'];
+    protected $helpers = ['url', 'form', 'CIMail', 'CIFunctions', 'spotify_helper'];
+
     public function index(): string
     {
         $laguModel = new LaguModel();
         $artisModel = new ArtisModel();
         $albumModel = new AlbumModel();
 
-
+        // Fetch data from the database
         $artis = $artisModel->findAll();
         $album = $albumModel->jointoArtis()->findAll();
+
+        // Fetch Spotify tracks
+        $accessToken = getSpotifyAccessToken();
+        $spotifyTracks = fetchSpotifyTracks($accessToken, 'top 50');
 
         $username = session()->get('username');
         session()->set('username', $username);
@@ -29,13 +34,13 @@ class Home extends BaseController
             'pageTitle' => 'Dashboard',
             'username' => $username,
             'artis' => $artis,
-            'album' => $album
-
+            'album' => $album,
+            'spotifyTracks' => $spotifyTracks['tracks']['items'] ?? []
         ];
-
 
         return view('home', $data);
     }
+
 
     public function lagu($id_artis = null, $id_lagu = null)
     {

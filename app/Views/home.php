@@ -39,8 +39,25 @@
     </div>
   <?php endforeach; ?>
 </div>
-<br>
 
+<br>
+<div class="artitle">
+  <p>Spotify Tracks</p>
+</div>
+<div class="carousel">
+  <?php foreach ($spotifyTracks as $track) : ?>
+    <div class="card">
+      <div class="cardpicture2">
+        <a href="<?= $track['external_urls']['spotify'] ?>" target="_blank">
+          <img src="<?= $track['album']['images'][0]['url']; ?>">
+        </a>
+      </div>
+      <div class="namealbum"><?= $track['name']; ?></div>
+      <div class="nameart"><?= $track['artists'][0]['name']; ?></div>
+    </div>
+  <?php endforeach; ?>
+</div>
+<br>
 
 <?= $this->endSection(); ?>
 
