@@ -15,31 +15,88 @@ class Home extends BaseController
     protected $helpers = ['url', 'form', 'CIMail', 'CIFunctions', 'spotify_helper'];
 
     public function index(): string
+{
+    $laguModel = new LaguModel();
+    $artisModel = new ArtisModel();
+    $albumModel = new AlbumModel();
+
+    // Fetch data from the database
+    $artis = $artisModel->findAll();
+    $album = $albumModel->jointoArtis()->findAll();
+
+    // Fetch Spotify data
+    $accessToken = getSpotifyAccessToken();
+    $spotifyTracksOne = fetchSpotifyTracks($accessToken, 'teratas');
+    $spotifyTracksTwo = fetchSpotifyTracks($accessToken, '4aawyAB9vmqN3uQ7FjRGTy');
+    $spotifyArtists = fetchSpotifyArtists($accessToken, '0TnOYISbd1XYRBk9myaseg'); // Change this query to whatever you want
+
+    $username = session()->get('username');
+    session()->set('username', $username);
+    $data = [
+        'pageTitle' => 'Dashboard',
+        'username' => $username,
+        'artis' => $artis,
+        'album' => $album,
+        'spotifyTracksOne' => $spotifyTracksOne['tracks']['items'] ?? [],
+        'spotifyTracksTwo' => $spotifyTracksTwo['tracks']['items'] ?? [],
+        'spotifyArtists' => $spotifyArtists['artists']['items'] ?? [],
+        'accessToken' => $accessToken
+    ];
+
+    return view('home', $data);
+}
+
+
+    public function spotifyAlbum($albumId)
     {
-        $laguModel = new LaguModel();
-        $artisModel = new ArtisModel();
-        $albumModel = new AlbumModel();
-
-        // Fetch data from the database
-        $artis = $artisModel->findAll();
-        $album = $albumModel->jointoArtis()->findAll();
-
-        // Fetch Spotify tracks
         $accessToken = getSpotifyAccessToken();
-        $spotifyTracks = fetchSpotifyTracks($accessToken, 'top 50');
+        $album = getSpotifyAlbumTracks($accessToken, $albumId);
 
-        $username = session()->get('username');
-        session()->set('username', $username);
+        $jumlahLagu = count($album['tracks']['items']);
+        $totalDuration = array_reduce($album['tracks']['items'], function ($carry, $track) {
+            return $carry + $track['duration_ms'];
+        }, 0);
+
+        $totalDuration = gmdate("H:i:s", $totalDuration / 1000);
+
         $data = [
-            'pageTitle' => 'Dashboard',
-            'username' => $username,
-            'artis' => $artis,
             'album' => $album,
-            'spotifyTracks' => $spotifyTracks['tracks']['items'] ?? []
+            'lagu' => $album['tracks']['items'],
+            'jumlahLagu' => $jumlahLagu,
+            'totalDuration' => $totalDuration,
+            'pageTitle' => $album['name']
         ];
 
-        return view('home', $data);
+        return view('listmusicalbumsp', $data);
     }
+    
+
+    public function spotifyTrack($trackId)
+{
+    $accessToken = getSpotifyAccessToken();
+    $url = 'https://api.spotify.com/v1/tracks/' . $trackId;
+
+    $headers = [
+        'Authorization: Bearer ' . $accessToken,
+    ];
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+    $track = json_decode($result, true);
+
+    $data = [
+        'track' => $track,
+        'pageTitle' => $track['name'],
+        'accessToken' => $accessToken
+    ];
+
+    return view('spotify_track', $data);
+}
 
 
     public function lagu($id_artis = null, $id_lagu = null)
@@ -152,7 +209,7 @@ class Home extends BaseController
             'lagu' => $lagu,
             'artis' => $artisModel,
             'jumlahLagu' => $jumlahLagu,
-            'totalDuration' => $totalDuration, 
+            'totalDuration' => $totalDuration,
             'pageTitle' => isset($album['nama_album']) ? $album['nama_album'] : 'Album'
         ];
 

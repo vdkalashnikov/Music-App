@@ -10,145 +10,157 @@
       justify-content: center;
       align-items: center;
       letter-spacing: 1px;
-      background-color: #0c1022;
+      background-color: #383c4e;
+      color: red;
   }
-  .login_form_container{
-      position: relative;
-      width: 400px;
-      height: 520px;
-      background: #040717;
-      border-radius: 50px 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      margin-top: 10vh;
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-left: 2.7em;
+    padding-right: 2.7em;
+    padding-bottom: 0.4em;
+    background-color: #171717;
+    border-radius: 20px;
   }
-  .login_form_container::before{
-      
-      position: absolute;
-      width: 170%;
-      height: 170%;
-      content: '';
-      background-image: conic-gradient(transparent, transparent, transparent, #ee00ff);
-      animation: rotate_border 6s linear infinite;
   
+  #heading {
+    margin: 1em;
+    text-align: center;
+    color: rgb(0, 255, 200);
+    font-size: 2rem;
   }
-  .login_form_container::after{
-      
-      position: absolute;
-      width: 170%;
-      height: 170%;
-      content: '';
-      background-image: conic-gradient(transparent, transparent, transparent, #00ccff);
-      animation: rotate_border 6s linear infinite;
-      animation-delay: -3s;
-  }
-  @keyframes rotate_border{
-      0%{
-          transform: rotate(0deg);
-      }
-      100%{
-          transform: rotate(360deg);
-      }
-  }
-  .login_form{
-      position: absolute;
-      content: '';
-      background-color: #0c1022;
-      border-radius: 30px 5px;
-      inset: 5px;
-      padding: 30px 30px;
-      z-index: 10;
-      color: #00ccff;
   
-  } 
-  h2{
-      font-size: 40px;
-      font-weight: 600;
-      text-align: center;
+  .field {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.5em;
+    border-radius: 25px;
+    width: 350px;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.9em;
+    padding-bottom: 0.9em;
+    outline: none;
+    color: white;
+    background-color: #171717;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
   }
-  .input_group{
-      margin-top: 40px;
-      position:relative;
-      display:flex;
-      align-items: center;
-      justify-content: start;
-  }
-  .input_text{
-      width: 95%;
-      height: 30px;
-      background: transparent;
-      border: none;
-      outline: none;
-      border-bottom: 1px solid #00ccff;
-      font-size: 20px;
-      padding-left: 10px;
-      color: #00ccff;
   
+  .input-icon {
+    height: 1.3em;
+    width: 1.3em;
+    fill: rgb(0, 255, 200);
   }
-  ::placeholder{
-      font-size: 15px;
-      color: #00ccff52;
-      letter-spacing: 1px;
   
+  .input-field {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: rgb(0, 255, 200);
+    letter-spacing: 1px;
   }
-  .fa{
-      font-size: 20px;
   
+  .form .btn {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-bottom: 2em;
   }
-  #login_button{
-      position: relative;
-      width: auto;
-      height: 40px;
-      transition: 1s;
-      margin-top: 3vh;
   
-  
+  .button1 {
+    padding: 0.5em;
+    padding-left: 1.1em;
+    padding-right: 1.1em;
+    border-radius: 5px;
+    margin-right: 0.5em;
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
   }
-  #login_button button{
-      
-      width: 100%;
-      height: 100%;
-      text-decoration: none;
-      z-index: 10;
-      cursor: pointer;
-      font-size: 22px;
-      letter-spacing: 2px;
-      border: 1px solid #00ccff;
-      border-radius: 50px;
-      background-color: #0c1022;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #00ccff;
+  
+  .button1:hover {
+    background-image: linear-gradient(163deg,  #a00000fa 0%, #d10050 100%);
+    color: rgb(0, 255, 200);
+  }
+  
+  .button2 {
+    flex-grow: 1;
+    padding: 0.5em;
+    padding-left: 2.3em;
+    padding-right: 2.3em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+  }
+  
+  .button2:hover {
+    background-image: linear-gradient(163deg, #00642f 0%, #13034b 100%);
+    color: rgb(0, 255, 200);
   }
 
-  #login_button button:hover{
-    border-radius: 4rem;
-    color: #0c1022;
-    background-color: #00ccff;
-    border: 1px solid #0c1022;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    white-space: nowrap;
+  
+  .button3 {
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+    color: rgb(0, 0, 0);
+    margin-top: 2em;
     cursor: pointer;
-    transition: all 0.3s;
-}
-  
-  .footer {
-      margin-top: 30px;
-      display: flex;
-      justify-content: space-between;
-  
   }
-  .footer a{
-      text-decoration: none;
-      cursor: pointer;
-      font-size: 18px;
-  }
-  .glowIcon {
-      text-shadow: 0 0 10px #00ccff;
   
+  .button3:hover {
+    background-image: linear-gradient(163deg, #00642f 0%, #13034b 100%);
+    color: rgb(0, 255, 200);
+  }
+  
+  .card {
+    background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+    border-radius: 22px;
+    transition: all .3s;
+    margin-top: 50px;
+  }
+  
+  .card2 {
+    border-radius: 0;
+    transition: all .2s;
+  }
+  
+  .card2:hover {
+    transform: scale(0.98);
+    border-radius: 20px;
+  }
+  
+  .card:hover {
+    box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30);
+  }
+
+  a{
+    text-decoration: none;
+    color: black;
+  }
+
+  #bt2:hover{
+    background-image: linear-gradient(163deg, #00642f 0%, #13034b 100%);
+    color: rgb(0, 255, 200);
+    background: none;
+  }
+
+  #bt1:hover{
+    background-image: linear-gradient(163deg, #00642f 0%, #13034b 100%);
+    color: rgb(255, 255, 255);
+    background: none;
   }

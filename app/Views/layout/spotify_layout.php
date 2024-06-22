@@ -15,9 +15,6 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <script src="/assets/js/script.js" defer></script>
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
@@ -25,7 +22,7 @@
 </head>
 
 <body>
-<!-- <?php include('inc/navsong.php') ?> -->
+
 <div>
 <?= $this->renderSection('content'); ?>
 </div>

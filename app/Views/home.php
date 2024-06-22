@@ -45,19 +45,56 @@
   <p>Spotify Tracks</p>
 </div>
 <div class="carousel">
-  <?php foreach ($spotifyTracks as $track) : ?>
+  <?php foreach ($spotifyTracksOne as $trackOne) : ?>
     <div class="card">
       <div class="cardpicture2">
-        <a href="<?= $track['external_urls']['spotify'] ?>" target="_blank">
-          <img src="<?= $track['album']['images'][0]['url']; ?>">
+        <a href="<?= route_to('user.spotifyAlbum', $trackOne['album']['id']) ?>">
+          <img src="<?= $trackOne['album']['images'][0]['url']; ?>">
         </a>
       </div>
-      <div class="namealbum"><?= $track['name']; ?></div>
-      <div class="nameart"><?= $track['artists'][0]['name']; ?></div>
+      <div class="namealbum"><?= $trackOne['album']['name']; ?></div>
+      <div class="nameart"><?= $trackOne['artists'][0]['name']; ?></div>
     </div>
   <?php endforeach; ?>
 </div>
 <br>
+<div class="artitle">
+  <p>Spotify Tracks</p>
+</div>
+<div class="carousel">
+  <?php foreach ($spotifyTracksTwo as $trackTwo) : ?>
+    <div class="card">
+      <div class="cardpicture2">
+        <a href="<?= route_to('user.spotifyAlbum', $trackTwo['album']['id']) ?>">
+          <img src="<?= $trackTwo['album']['images'][0]['url']; ?>">
+        </a>
+      </div>
+      <div class="namealbum"><?= $trackTwo['album']['name']; ?></div>
+      <div class="nameart"><?= $trackTwo['artists'][0]['name']; ?></div>
+    </div>
+  <?php endforeach; ?>
+</div>
+
+<br>
+
+<div class="artitle">
+  <p>Spotify Artists</p>
+</div>
+<div class="carousel">
+  <?php foreach ($spotifyArtists as $artist) : ?>
+    <div class="card">
+      <div class="cardpicture2">
+        <a href="<?= $artist['external_urls']['spotify']; ?>" target="_blank">
+          <?php if (isset($artist['images'][0]['url'])): ?>
+              <img src="<?= $artist['images'][0]['url']; ?>" alt="<?= $artist['name']; ?>">
+          <?php endif; ?>
+        </a>
+      </div>
+      <div class="namealbum"><?= $artist['name']; ?></div>
+      <div class="nameart"><?= $artist['genres'][0] ?? 'Unknown Genre'; ?></div>
+    </div>
+  <?php endforeach; ?>
+</div>
 
 <?= $this->endSection(); ?>
 

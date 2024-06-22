@@ -14,7 +14,7 @@
             <div class="track-name"><?= $currentLagu['nama_lagu']; ?></div>
             <div class="track-artist"><?= $currentLagu['nama']; ?></div>
         </div>
-
+<div class="triple">
         <div class="slider_container">
             <div class="current-time">00:00</div>
             <input type="range" min="1" max="100" value="0" class="seek_slider" onchange="seekTo()">
@@ -35,7 +35,7 @@
                 <i class="fa fa-step-backward fa-2x"></i>
             </div>
             <div class="playpause-track" onclick="playpauseTrack()">
-                <i class="fa fa-play-circle fa-5x"></i>
+                <i class="fa fa-play-circle fa-4x"></i>
             </div>
             <div class="next-track" onclick="nextTrack()">
                 <i class="fa fa-step-forward fa-2x"></i>
@@ -44,15 +44,15 @@
                 <i class="fa fa-repeat fa-2x" title="repeat"></i>
             </div>
         </div>
-
-        <div id="wave">
-            <span class="stroke"></span>
-            <span class="stroke"></span>
-            <span class="stroke"></span>
-            <span class="stroke"></span>
-            <span class="stroke"></span>
-            <span class="stroke"></span>
         </div>
+        <!-- <div id="wave">
+            <span class="stroke"></span>
+            <span class="stroke"></span>
+            <span class="stroke"></span>
+            <span class="stroke"></span>
+            <span class="stroke"></span>
+            <span class="stroke"></span>
+        </div> -->
     </div>
 </div>
 

@@ -6,7 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
- $routes->group('user', static function ($routes) {
+$routes->group('user', static function ($routes) {
     // Rute untuk pengguna yang sudah login (auth)
     $routes->group('', ['filter' => 'cifilter:auth'], static function ($routes) {
         $routes->get('home', 'Home::index', ['as' => 'user.home']);
@@ -16,6 +16,9 @@ use CodeIgniter\Router\RouteCollection;
         $routes->get('api/songs', 'Home::getSongs');
         $routes->get('artis/(:num)', 'Home::artis/$1', ['as' => 'user.artis']);
         $routes->get('album/(:num)', 'Home::album/$1', ['as' => 'user.album']);
+        $routes->get('spotify/album/(:segment)', 'Home::spotifyAlbum/$1', ['as' => 'user.spotifyAlbum']);
+        $routes->get('spotify/track/(:segment)', 'Home::spotifyTrack/$1', ['as' => 'user.spotifyTrack']);
+        $routes->get('spotify/artist/(:segment)', 'Home::spotifyArtist/$1', ['as' => 'user.spotifyArtist']);
         $routes->get('profile', 'Home::profile', ['as' => 'user.profile']);
         $routes->post('profile/update', 'Home::updateProfile', ['as' => 'user.profile.update']);
         $routes->post('update-profile-picture', 'Home::updateProfilePicture', ['as' => 'user.update.picture']);
@@ -37,4 +40,3 @@ use CodeIgniter\Router\RouteCollection;
     $routes->get('register', 'Register::registerForm', ['as' => 'user.register']);
     $routes->post('register', 'Register::saveForm', ['as' => 'user.save']);
 });
-
