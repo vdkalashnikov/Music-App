@@ -26,9 +26,10 @@ class Home extends BaseController
 
     // Fetch Spotify data
     $accessToken = getSpotifyAccessToken();
-    $spotifyTracksOne = fetchSpotifyTracks($accessToken, 'teratas');
-    $spotifyTracksTwo = fetchSpotifyTracks($accessToken, '4aawyAB9vmqN3uQ7FjRGTy');
-    $spotifyArtists = fetchSpotifyArtists($accessToken, '0TnOYISbd1XYRBk9myaseg'); // Change this query to whatever you want
+    $spotifyTracksOne = fetchSpotifyTracks($accessToken, 'dj');
+    $spotifyTracksTwo = fetchSpotifyTracks($accessToken, 'gym music', 'track', 8);
+    $spotifyArtists = fetchSpotifyArtists($accessToken, 'alan walker,marshmello,billie eilish,bruno mars,ariana grande,coldplay'); // Change this query to whatever you want
+    $spotifyPlaylists = fetchSpotifyPlaylists($accessToken, 'hot hits indonesia', 'playlist', 8); // Fetch playlists
 
     $username = session()->get('username');
     session()->set('username', $username);
@@ -40,6 +41,7 @@ class Home extends BaseController
         'spotifyTracksOne' => $spotifyTracksOne['tracks']['items'] ?? [],
         'spotifyTracksTwo' => $spotifyTracksTwo['tracks']['items'] ?? [],
         'spotifyArtists' => $spotifyArtists['artists']['items'] ?? [],
+        'spotifyPlaylists' => $spotifyPlaylists['playlists']['items'] ?? [], // Add playlists data
         'accessToken' => $accessToken
     ];
 
@@ -89,13 +91,105 @@ class Home extends BaseController
 
     $track = json_decode($result, true);
 
+    $referer = $this->request->getServer('HTTP_REFERER');
+    $isArtistPage = strpos($referer, 'spotifyArtist') !== false;
+    $isAlbumPage = strpos($referer, 'spotify/album') !== false; // Adjusted line
+    $isPlaylistPage = strpos($referer, 'spotify/playlist') !== false; // Adjusted line
+
+    // Extract the playlist ID from the referer URL if it is a playlist page
+    $playlistId = null;
+    if ($isPlaylistPage) {
+        $urlComponents = explode('/', $referer);
+        $playlistId = end($urlComponents);
+    }
+
     $data = [
         'track' => $track,
         'pageTitle' => $track['name'],
-        'accessToken' => $accessToken
+        'isArtistPage' => $isArtistPage,
+        'isAlbumPage' => $isAlbumPage,
+        'isPlaylistPage' => $isPlaylistPage,
+        'playlistId' => $playlistId
     ];
 
     return view('spotify_track', $data);
+}
+
+
+
+
+
+    public function spotifyArtist($artistId)
+    {
+        $accessToken = getSpotifyAccessToken();
+        $artistUrl = 'https://api.spotify.com/v1/artists/' . $artistId;
+        $tracksUrl = 'https://api.spotify.com/v1/artists/' . $artistId . '/top-tracks?market=US';
+
+        // Fetch artist details
+        $headers = ['Authorization: Bearer ' . $accessToken];
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $artistUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        $artistResult = curl_exec($ch);
+        curl_close($ch);
+
+        $artist = json_decode($artistResult, true);
+
+        // Fetch top tracks for the artist
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $tracksUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        $tracksResult = curl_exec($ch);
+        curl_close($ch);
+
+        $tracks = json_decode($tracksResult, true)['tracks'];
+
+        $data = [
+            'artist' => $artist,
+            'tracks' => $tracks,
+            'pageTitle' => $artist['name'],
+        ];
+
+        return view('listmusicartsp', $data);
+    }
+
+    public function spotifyPlaylist($playlistId)
+{
+    $accessToken = getSpotifyAccessToken();
+    $playlistUrl = 'https://api.spotify.com/v1/playlists/' . $playlistId;
+
+    // Fetch playlist details
+    $headers = ['Authorization: Bearer ' . $accessToken];
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $playlistUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    $playlistResult = curl_exec($ch);
+    curl_close($ch);
+
+    $playlist = json_decode($playlistResult, true);
+    $tracks = $playlist['tracks']['items'];
+
+    // Calculate total duration
+    $totalDurationMs = 0;
+    foreach ($tracks as $trackItem) {
+        $totalDurationMs += $trackItem['track']['duration_ms'];
+    }
+    $totalDuration = gmdate("H:i:s", $totalDurationMs / 1000);
+
+    $data = [
+        'playlist' => $playlist,
+        'tracks' => $tracks,
+        'pageTitle' => $playlist['name'],
+        'totalTracks' => count($tracks),
+        'totalDuration' => $totalDuration,
+    ];
+
+    return view('listplaylistsp', $data);
 }
 
 
@@ -374,6 +468,30 @@ class Home extends BaseController
             }
         }
     }
+
+    public function search()
+    {
+        $data = [
+            'pageTitle' => 'Search',
+        ];
+
+        return view('search', $data);
+    }
+
+    public function searchSpotify()
+    {
+        helper('spotify_helper');
+
+        $query = $this->request->getPost('query');
+        $accessToken = getSpotifyAccessToken();
+        $spotifyArtists = fetchSpotifyArtists($accessToken, $query);
+
+        return $this->response->setJSON($spotifyArtists);
+    }
+
+
+
+
 }
 
 

@@ -1,18 +1,24 @@
-<?= $this->extend('/layout/listmusic_layout'); ?>
+<?= $this->extend('/layout/listmusicalbum_layout'); ?>
 <?= $this->section('content'); ?>
 
 <section>
     <div class="contain">
         <div class="column1">
             <div class="incolumn1">
-                <img src="<?= $artist['images'][0]['url'] ?? base_url('assets/img/default_artist.png'); ?>" alt="<?= $artist['name']; ?>">
+                <img src="<?= $playlist['images'][0]['url'] ?? base_url('assets/img/default_playlist.png'); ?>" alt="<?= $playlist['name']; ?>">
             </div>
         </div>
         <div class="column2">
             <div class="incolumn2">
-                <h2><?= $artist['name']; ?></h2>
-                <h2><?= $artist['genres'][0] ?? 'Unknown'; ?></h2>
-                <h2><?= $artist['followers']['total'] ?? 'Unknown'; ?> Pengikut</h2>
+                <h2 id="albumname"><?= $playlist['name']; ?></h2>
+                <div class="isiincolumn2">
+                <img src="<?= $playlist['images'][0]['url']; ?>" alt="<?= $playlist['owner']['display_name']; ?>">
+                    <h2><?= $playlist['owner']['display_name']; ?>. </h2>
+                    <h2><?= $totalTracks; ?> Lagu,</h2>
+                    <h2><?= $totalDuration; ?></h2>
+                </div>
+                <h2><?= $playlist['followers']['total'] ?? 'Unknown'; ?> Pengikut</h2>
+                
             </div>
         </div>
     </div>
@@ -28,7 +34,9 @@
                 </tr>
             </thead>
             <tbody id="song-table-body">
-                <?php foreach ($tracks as $index => $track) : ?>
+                <?php foreach ($tracks as $index => $trackItem) :
+                    $track = $trackItem['track'];
+                ?>
                     <tr>
                         <th scope="row"><?= $index + 1; ?></th>
                         <td>

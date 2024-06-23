@@ -18,8 +18,11 @@ $routes->group('user', static function ($routes) {
         $routes->get('album/(:num)', 'Home::album/$1', ['as' => 'user.album']);
         $routes->get('spotify/album/(:segment)', 'Home::spotifyAlbum/$1', ['as' => 'user.spotifyAlbum']);
         $routes->get('spotify/track/(:segment)', 'Home::spotifyTrack/$1', ['as' => 'user.spotifyTrack']);
-        $routes->get('spotify/artist/(:segment)', 'Home::spotifyArtist/$1', ['as' => 'user.spotifyArtist']);
+        $routes->get('spotifyArtist/(:any)', 'Home::spotifyArtist/$1', ['as' => 'user.spotifyArtist']);
+        $routes->get('spotify/playlist/(:segment)', 'Home::spotifyPlaylist/$1', ['as' => 'user.spotifyPlaylist']);
         $routes->get('profile', 'Home::profile', ['as' => 'user.profile']);
+        $routes->get('search', 'Home::search', ['as' => 'user.search']);
+        $routes->post('spotify/search', 'Home::searchSpotify', ['as' => 'user.searchSpotify']);
         $routes->post('profile/update', 'Home::updateProfile', ['as' => 'user.profile.update']);
         $routes->post('update-profile-picture', 'Home::updateProfilePicture', ['as' => 'user.update.picture']);
         $routes->post('change-password', 'Home::changePassword', ['as' => 'user.change.password']);

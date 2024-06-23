@@ -58,6 +58,8 @@ section{
 .incolumn2 {
     width: auto;
     display: flex;
+    justify-content: start;
+    flex-direction: column;
 }
 
 .incolumn2 h2{
@@ -91,14 +93,6 @@ table img{
     border-radius: 10px;
     overflow: hidden;
 }
-
-
-
-
-
-
-
-
 
 
 

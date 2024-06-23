@@ -83,18 +83,38 @@
 <div class="carousel">
   <?php foreach ($spotifyArtists as $artist) : ?>
     <div class="card">
-      <div class="cardpicture2">
-        <a href="<?= $artist['external_urls']['spotify']; ?>" target="_blank">
+      <div class="cardpicture">
+        <a href="<?= route_to('user.spotifyArtist', $artist['id']); ?>">
           <?php if (isset($artist['images'][0]['url'])): ?>
               <img src="<?= $artist['images'][0]['url']; ?>" alt="<?= $artist['name']; ?>">
           <?php endif; ?>
         </a>
       </div>
       <div class="namealbum"><?= $artist['name']; ?></div>
-      <div class="nameart"><?= $artist['genres'][0] ?? 'Unknown Genre'; ?></div>
+      <div class="namealbum"><?= $artist['genres'][0] ?? 'Unknown'; ?></div>
     </div>
   <?php endforeach; ?>
 </div>
+
+<br>
+
+<div class="artitle">
+  <p>Spotify Playlists</p>
+</div>
+<div class="carousel">
+  <?php foreach ($spotifyPlaylists as $playlist) : ?>
+    <div class="card">
+      <div class="cardpicture">
+        <a href="<?= route_to('user.spotifyPlaylist', $playlist['id']); ?>">
+          <img src="<?= $playlist['images'][0]['url']; ?>" alt="<?= $playlist['name']; ?>">
+        </a>
+      </div>
+      <div class="namealbum"><?= $playlist['name']; ?></div>
+      <div class="namealbum"><?= $playlist['owner']['display_name']; ?></div>
+    </div>
+  <?php endforeach; ?>
+</div>
+
 
 <?= $this->endSection(); ?>
 

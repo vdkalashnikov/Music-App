@@ -11,7 +11,7 @@
 
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href=""><i class="bi bi-search"></i></a>
+          <a class="nav-link active" aria-current="page" href="<?= route_to('user.search'); ?>"><i class="bi bi-search"></i></a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="<?= route_to('user.profile'); ?>"><i class="bi bi-person"></i></a>
