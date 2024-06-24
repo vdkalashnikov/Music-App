@@ -11,15 +11,16 @@ $routes->group('user', static function ($routes) {
     $routes->group('', ['filter' => 'cifilter:auth'], static function ($routes) {
         $routes->get('home', 'Home::index', ['as' => 'user.home']);
         $routes->get('logout', 'Home::logoutUserHandler', ['as' => 'user.logout']);
-        $routes->get('lagu/(:num)/(:num)', 'Home::lagu/$1/$2', ['as' => 'user.lagu']);
-        $routes->get('lagu_album/(:num)/(:num)', 'Home::laguByAlbum/$1/$2', ['as' => 'user.lagu.album']);
+     
+        $routes->get('lagu/(:any)/(:any)', 'Home::lagu/$1/$2', ['as' => 'user.lagu']);
+        $routes->get('lagu_album/(:any)/(:any)', 'Home::laguByAlbum/$1/$2', ['as' => 'user.lagu.album']);
         $routes->get('api/songs', 'Home::getSongs');
-        $routes->get('artis/(:num)', 'Home::artis/$1', ['as' => 'user.artis']);
-        $routes->get('album/(:num)', 'Home::album/$1', ['as' => 'user.album']);
-        $routes->get('spotify/album/(:segment)', 'Home::spotifyAlbum/$1', ['as' => 'user.spotifyAlbum']);
-        $routes->get('spotify/track/(:segment)', 'Home::spotifyTrack/$1', ['as' => 'user.spotifyTrack']);
+        $routes->get('artis/(:any)', 'Home::artis/$1', ['as' => 'user.artis']);
+        $routes->get('album/(:any)', 'Home::album/$1', ['as' => 'user.album']);
+        $routes->get('spotify/album/(:any)', 'Home::spotifyAlbum/$1', ['as' => 'user.spotifyAlbum']);
+        $routes->get('spotify/track/(:any)', 'Home::spotifyTrack/$1', ['as' => 'user.spotifyTrack']);
         $routes->get('spotifyArtist/(:any)', 'Home::spotifyArtist/$1', ['as' => 'user.spotifyArtist']);
-        $routes->get('spotify/playlist/(:segment)', 'Home::spotifyPlaylist/$1', ['as' => 'user.spotifyPlaylist']);
+        $routes->get('spotify/playlist/(:any)', 'Home::spotifyPlaylist/$1', ['as' => 'user.spotifyPlaylist']);
         $routes->get('profile', 'Home::profile', ['as' => 'user.profile']);
         $routes->get('search', 'Home::search', ['as' => 'user.search']);
         $routes->post('spotify/search', 'Home::searchSpotify', ['as' => 'user.searchSpotify']);

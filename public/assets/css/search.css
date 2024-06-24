@@ -1,10 +1,16 @@
 body{
     width: 100%;
-    background: rgb(21, 21, 21);
+   
 }
 
 .navbar{
     background-color: rgb(33, 33, 33);
+  }
+
+  #judul h3{
+    color: white;
+    text-align: center;
+    
   }
 
 .contain1{
@@ -22,7 +28,7 @@ body{
 
 
 .row1{
-    width: 100%;
+  width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -102,6 +108,14 @@ body{
     height: auto;
   }
   
+  #toggle{
+    border: none;
+    color: white;
+  }
+  
+  #toggle-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  }
   
   .name {
     font-weight: 700;
@@ -123,20 +137,9 @@ body{
 .bi-person{
     color: white;
   }
-  
   .bi-gear{
     color: white;
-  }
-  
-  
+  } 
   .bi-music-note-beamed{
     color: white;
-  }
-  
-  .navbar-toggler{
-    color: white;
-  }
-  
-  .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
   }

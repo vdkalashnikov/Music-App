@@ -14,7 +14,7 @@
     <script src="script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
-    <title>Beranda</title>
+    <title><?= isset($pageTitle) ? $pageTitle : 'Lagu'; ?></title>
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/musiclogoo.png" />
 </head>
 

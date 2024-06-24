@@ -10,7 +10,7 @@
         <?php elseif ($isPlaylistPage && isset($playlistId)) : ?>
             <a id="back" href="<?= route_to('user.spotifyPlaylist', $playlistId); ?>"><i class="bi bi-music-note-list"></i></a>
         <?php else : ?>
-            <p>Tidak dapat menentukan asal halaman.</p>
+            <a id="back" href="<?= route_to('user.search'); ?>"><i class="bi bi-music-note-list"></i></a>
         <?php endif; ?>
         <div class="details">
             <div class="now-playing">PLAYING</div>

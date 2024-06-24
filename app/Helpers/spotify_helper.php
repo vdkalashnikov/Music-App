@@ -28,9 +28,9 @@ if (!function_exists('getSpotifyAccessToken')) {
 }
 
 if (!function_exists('fetchSpotifyTracks')) {
-    function fetchSpotifyTracks($accessToken, $query, $type = 'track', $limit = 10)
+    function fetchSpotifyTracks($accessToken, $query, $limit = 6)
     {
-        $url = 'https://api.spotify.com/v1/search?q=' . urlencode($query) . '&type=' . $type . '&limit=' . $limit;
+        $url = 'https://api.spotify.com/v1/search?q=' . urlencode($query) . '&type=track&limit=' . $limit;
 
         $headers = [
             'Authorization: Bearer ' . $accessToken,
@@ -46,6 +46,7 @@ if (!function_exists('fetchSpotifyTracks')) {
         return json_decode($result, true);
     }
 }
+
 
 if (!function_exists('getSpotifyAlbumTracks')) {
     function getSpotifyAlbumTracks($accessToken, $albumId)
@@ -88,21 +89,47 @@ if (!function_exists('fetchSpotifyArtists')) {
     }
 }
 
-function fetchSpotifyPlaylists($accessToken, $query, $type = 'playlist', $limit = 8) {
-    $url = 'https://api.spotify.com/v1/search?q=' . urlencode($query) . '&type=' . $type . '&limit=' . $limit;
-    $headers = [
-        'Authorization: Bearer ' . $accessToken,
-    ];
+if (!function_exists('fetchSpotifyAlbums')) {
+    function fetchSpotifyAlbums($accessToken, $query, $limit = 6)
+    {
+        $url = 'https://api.spotify.com/v1/search?q=' . urlencode($query) . '&type=album&limit=' . $limit;
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    $result = curl_exec($ch);
-    curl_close($ch);
+        $headers = [
+            'Authorization: Bearer ' . $accessToken,
+        ];
 
-    return json_decode($result, true);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return json_decode($result, true);
+    }
 }
+
+
+if (!function_exists('fetchSpotifyPlaylists')) {
+    function fetchSpotifyPlaylists($accessToken, $query, $limit = 6)
+    {
+        $url = 'https://api.spotify.com/v1/search?q=' . urlencode($query) . '&type=playlist&limit=' . $limit;
+
+        $headers = [
+            'Authorization: Bearer ' . $accessToken,
+        ];
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return json_decode($result, true);
+    }
+}
+
 
 
 

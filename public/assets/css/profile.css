@@ -160,6 +160,7 @@ form{
 
 .navbar-toggler{
     color: white;
+    border: none;
   }
   
   .navbar-toggler-icon {

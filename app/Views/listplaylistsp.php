@@ -17,7 +17,7 @@
                     <h2><?= $totalTracks; ?> Lagu,</h2>
                     <h2><?= $totalDuration; ?></h2>
                 </div>
-                <h2><?= $playlist['followers']['total'] ?? 'Unknown'; ?> Pengikut</h2>
+                <h2><?= isset($playlist['followers']['total']) ? number_format($playlist['followers']['total']) : ''; ?> Suka</h2>
                 
             </div>
         </div>

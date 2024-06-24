@@ -1,4 +1,4 @@
-<?= $this->extend('/layout/listmusic_layout'); ?>
+<?= $this->extend('/layout/listmusicalbum_layout'); ?>
 <?= $this->section('content'); ?>
 
 <section>
@@ -11,8 +11,8 @@
         <div class="column2">
             <div class="incolumn2">
                 <h2><?= $artist['name']; ?></h2>
-                <h2><?= $artist['genres'][0] ?? 'Unknown'; ?></h2>
-                <h2><?= $artist['followers']['total'] ?? 'Unknown'; ?> Pengikut</h2>
+                <h2><?= $artist['genres'][0] ?? ''; ?></h2>
+                <h2><?= isset($artist['followers']['total']) ? number_format($artist['followers']['total']) : ''; ?> Pengikut</h2>
             </div>
         </div>
     </div>

@@ -10,7 +10,7 @@ body {
 
 .message h2{
   color: rgb(245, 245, 245);
-  margin-top: 10vh;
+  margin-top: 80px;
   margin-bottom: 5vh;
   margin-left: 3vh;
 }
@@ -147,6 +147,7 @@ body {
 
 .navbar-toggler{
   color: white;
+  border: none;
 }
 
 .navbar-toggler-icon {
