@@ -21,6 +21,23 @@
 function displayResults(result) {
     $('#search-results').html('');
 
+    <!-- Display Local Tracks -->
+    if (result.local.tracks.length > 0) {
+       
+        $.each(result.local.tracks, function(i, track) {
+            $('#search-results').append(`
+                <div class="cardo">
+                    <div class="cardpicture2">
+                        <a href="<?= route_to('user.lagu.track', '') ?>${track.id}">
+                            <img src="<?= base_url('image/' . '') ?>${track.gambar}" alt="${track.nama_lagu}">
+                        </a>
+                    </div>
+                    <div class="namealbum">${track.nama_lagu}</div>
+                </div>
+            `);
+        });
+    }
+
     // Display Local Artists
     if (result.local.artists.length > 0) {
        
@@ -194,19 +211,4 @@ $(document).ready(function() {
 
 <?= $this->endSection(); ?>
 <!-- $('#search-results').append('<h3 id="judul">Playlists</h3>'); -->
- <!-- Display Local Tracks
-    if (result.local.tracks.length > 0) {
-       
-        $.each(result.local.tracks, function(i, track) {
-            $('#search-results').append(`
-                <div class="cardo">
-                    <div class="cardpicture2">
-                        <a href="<?= route_to('user.lagu.track', '') ?>${track.id}">
-                            <img src="<?= base_url('image/' . '') ?>${track.gambar}" alt="${track.nama_lagu}">
-                        </a>
-                    </div>
-                    <div class="namealbum">${track.nama_lagu}</div>
-                </div>
-            `);
-        });
-    } -->
+ 

@@ -19,7 +19,7 @@ class AuthController extends BaseController
             'validation' => null,
         ];
 
-        return view('login', $data);
+        return view('/auth/login', $data);
     }
 
     public function loginUserHandler()
@@ -66,7 +66,7 @@ class AuthController extends BaseController
         }
 
         if (!$isValid) {
-            return view('login', [
+            return view('/auth/login', [
                 'pageTitle' => 'Login',
                 'validation' => $this->validator
             ]);
@@ -100,7 +100,7 @@ class AuthController extends BaseController
             'validation' => null
         ];
 
-        return view('forgot', $data);
+        return view('/auth/forgot', $data);
     }
 
     public function sendPasswordResetLink()
@@ -117,7 +117,7 @@ class AuthController extends BaseController
         ]);
 
         if (!$isValid) {
-            return view('forgot', [
+            return view('/auth/forgot', [
                 'pageTitle' => 'Forgot Password',
                 'validation' => $this->validator
             ]);
@@ -183,7 +183,7 @@ class AuthController extends BaseController
             if ($diffMins > 15) {
                 return redirect()->route('user.forgot.password')->with('fail', 'Token telah kadaluarsa, silahkan minta password reset link yang baru !');
             } else {
-                return view('reset', [
+                return view('/auth/reset', [
                     'pageTitle' => 'Reset Password',
                     'validation' => null,
                     'token' => $token
@@ -213,7 +213,7 @@ class AuthController extends BaseController
         ]);
 
         if (!$isValid) {
-            return view('reset', [
+            return view('/auth/reset', [
                 'pageTitle' => 'Reset Password',
                 'validation' => null,
                 'token' => $token,

@@ -15,7 +15,7 @@
     </b>
 </p>
 <br><br>
-Dimohon untuk menjaga akun anda, username dan password anda jangan pernah diberitahu kepada orang lain.
+Dimohon untuk menjaga akun anda, username dan password anda jangan pernah diberitahukan kepada orang lain.
 <p>
     Music App
 </p>

@@ -246,31 +246,30 @@ class Home extends BaseController
     }
 
 
-    // public function laguById($id_lagu = null)
-    // {
-    //     $laguModel = new LaguModel();
-    //     $artisModel = new ArtisModel();
-    //     $albumModel = new AlbumModel();
+    public function laguById($id_lagu = null)
+    {
+        $laguModel = new LaguModel();
+        
+        // Ambil semua lagu dengan join ke tabel artis
+        $laguList = $laguModel->joinArtis()->findAll();
+        
+        // Jika ada ID lagu yang diberikan, cari lagu tersebut
+        if ($id_lagu !== null) {
+            $currentLagu = $laguModel->joinArtis()->find($id_lagu);
+        } else {
+            // Jika tidak ada ID lagu yang diberikan, set currentLagu ke lagu pertama dalam antrian
+            $currentLagu = !empty($laguList) ? $laguList[0] : null;
+        }
 
-    //     if ($id_lagu!== null) {
-    //         $lagu = $laguModel->getLaguById($id_lagu);
-    //         $artis = $artisModel->find($lagu['id_artis']);
-    //         $album = $albumModel->find($lagu['id_album']);
-    //     } else {
-    //         $lagu = null;
-    //         $artis = null;
-    //         $album = null;
-    //     }
+        $data = [
+            'currentLagu' => $currentLagu,
+            'laguList' => $laguList,
+            'pageTitle' => $currentLagu['nama_lagu'] ?? 'Lagu tidak ditemukan'
+        ];
 
-    //     $data = [
-    //         'lagu' => $lagu,
-    //         'artis' => $artis,
-    //         'album' => $album,
-    //         'pageTitle' => $lagu['nama_lagu']
-    //     ];
+        return view('lagu2', $data);
+    }
 
-    //     return view('lagu', $data);
-    // }
 
     public function lagu($id_artis = null, $id_lagu = null)
     {
@@ -444,9 +443,9 @@ class Home extends BaseController
         $userId = CiAuth::id();
 
         if ($userModel->update($userId, $data)) {
-            return redirect()->route('user.profile')->with('success', 'Profile berhasil diupdate.');
+            return redirect()->route('user.profile')->with('success', 'Profile berhasil diperbarui.');
         } else {
-            return redirect()->route('user.profile')->with('fail', 'Failed to update profile.');
+            return redirect()->route('user.profile')->with('fail', 'Profile gagal diperbarui.');
         }
     }
 

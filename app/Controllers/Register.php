@@ -17,7 +17,7 @@ class Register extends BaseController
             'pageTitle' => 'Registrasi',
         ];
 
-        return view('register', $data);
+        return view('/auth/register', $data);
     }
 
     public function saveForm()
@@ -66,7 +66,7 @@ class Register extends BaseController
         ]);
 
         if (!$rules) {
-            return view('register', [
+            return view('/auth/register', [
                 'pageTitle' => 'Register',
                 'validation' => $this->validator
             ]);

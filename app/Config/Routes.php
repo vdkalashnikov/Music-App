@@ -11,7 +11,7 @@ $routes->group('user', static function ($routes) {
     $routes->group('', ['filter' => 'cifilter:auth'], static function ($routes) {
         $routes->get('home', 'Home::index', ['as' => 'user.home']);
         $routes->get('logout', 'Home::logoutUserHandler', ['as' => 'user.logout']);
-     
+        $routes->get('laguById/(:any)', 'Home::laguById/$1', ['as' => 'user.lagu.track']);
         $routes->get('lagu/(:any)/(:any)', 'Home::lagu/$1/$2', ['as' => 'user.lagu']);
         $routes->get('lagu_album/(:any)/(:any)', 'Home::laguByAlbum/$1/$2', ['as' => 'user.lagu.album']);
         $routes->get('api/songs', 'Home::getSongs');
