@@ -180,7 +180,7 @@ class AuthController extends BaseController
 
             $diffMins = Carbon::createFromFormat('Y-m-d H:i:s', $check_token->created_at)->diffInMinutes(Carbon::now());
 
-            if ($diffMins > 15) {
+            if ($diffMins > 60) {
                 return redirect()->route('user.forgot.password')->with('fail', 'Token telah kadaluarsa, silahkan minta password reset link yang baru !');
             } else {
                 return view('/auth/reset', [

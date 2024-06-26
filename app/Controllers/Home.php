@@ -26,7 +26,7 @@ class Home extends BaseController
 
         // Fetch Spotify data
         $accessToken = getSpotifyAccessToken();
-        $spotifyAlbums = fetchSpotifyAlbums($accessToken, 'dj remix indo');
+        $spotifyAlbums = fetchSpotifyAlbums($accessToken, 'rock,metal,jazz,country,latin,reggae,classical,pop,');
         $spotifyArtists = fetchSpotifyArtists($accessToken, 'coldplay,alan walker,marshmello,billie eilish,ariana grande,bruno mars', 6);
         $spotifyPlaylists = fetchSpotifyPlaylists($accessToken, 'top 50 global, top 50 indonesia, hot hits indonesia');
 

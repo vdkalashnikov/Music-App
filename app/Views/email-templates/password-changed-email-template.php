@@ -1,7 +1,7 @@
-<p>Dear
+<p align="center">Dear
     <?= $mail_data['user']->name; ?>
 </p>
-
+<hr>
 <p>
     Password mu pada web Music App telah berhasil diubah, ini adalah kredensial baru login mu:
     <br><br>

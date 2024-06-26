@@ -8,6 +8,7 @@
   <title><?= isset($pageTitle) ? $pageTitle : 'Music App'; ?></title>
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/musiclogoo.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"> -->
   <link rel="stylesheet" href="/assets/css/forgot.css" />
 </head>
 
@@ -20,7 +21,7 @@
           <?= csrf_field() ?>
           <p id="heading">Forgot Pasword</p>
           <?php if (!empty(session()->getFlashdata('success'))) : ?>
-          <div class="alert alert-success">
+          <div class="alert alert-success" id="berhasil">
             <?= session()->getFlashdata('success'); ?>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -29,7 +30,7 @@
         <?php endif; ?>
 
         <?php if (!empty(session()->getFlashdata('fail'))) : ?>
-          <div class="alert alert-danger">
+          <div class="alert alert-danger" id="gagal">
             <?= session()->getFlashdata('fail'); ?>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -65,6 +66,13 @@
         $(this).parent().fadeOut();
       });
     });
+
+    function aleert(){
+      document.getElementById("berhasil").style.color = "green";
+      document.getElementById("gagal").style.color = "red";
+    }
+
+    aleert()
   </script>
 </body>
 

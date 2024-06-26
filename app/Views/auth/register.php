@@ -114,6 +114,13 @@
         $(this).parent().fadeOut();
       });
     });
+
+    function aleert(){
+      document.getElementById("berhasil").style.color = "green";
+      document.getElementById("gagal").style.color = "red";
+    }
+
+    aleert()
   </script>
 </body>
 
