@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<?= base_url('/extra-assets/ijaboCropTool/ijaboCropTool.min.css') ?>">
     <link rel="stylesheet" href="/assets/css/profile.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/sweetalert2/src/sweetalert2.min.css" />
 
 </head>
 

@@ -14,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
     <link rel="shortcut icon" type="image/icon" href="/assets/img/musiclogoo.png" />
     <title><?= isset($pageTitle) ? $pageTitle : 'Lagu'; ?></title>
+    <link rel="stylesheet" type="text/css" href="/sweetalert2/src/sweetalert2.min.css" />
 </head>
 
 <body style="background-color: rgb(21, 21, 21);">
@@ -21,6 +22,8 @@
     <div>
         <?= $this->renderSection('content'); ?>
     </div>
+    <script src="/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <?= $this->renderSection('scripts'); ?>
 </body>
 
 </html>

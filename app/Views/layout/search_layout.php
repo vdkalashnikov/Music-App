@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/assets/css/search.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="/sweetalert2/src/sweetalert2.min.css" />
 </head>
 
 <body style="background-color: rgb(34, 33, 33);">
@@ -20,6 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="/sweetalert2/dist/sweetalert2.all.min.js"></script>
         <?= $this->renderSection('scripts'); ?>
 </body>
 

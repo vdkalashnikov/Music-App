@@ -167,3 +167,13 @@ body{
     background: none;
   }
 
+  input[type="password"]::-ms-reveal, /* Targeting Internet Explorer */
+  input[type="password"]::-ms-clear {
+      color: white; /* Set color to white */
+  }
+  
+  input[type="password"]::-webkit-contacts-auto-fill-button, /* Targeting Chrome, Safari, Edge */
+  input[type="password"]::-webkit-password-toggle-button {
+      color: white; /* Set color to white */
+  }
+  
