@@ -11,7 +11,7 @@ class Register extends BaseController
 {
     public function registerForm()
     {
-        helper('form');  // Load the form helper
+        helper('form');
 
         $data = [
             'pageTitle' => 'Registrasi',

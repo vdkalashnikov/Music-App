@@ -45,7 +45,7 @@
   <p>Album Dari Spotify</p>
 </div>
 <div class="carousel">
-  <?php foreach ($spotifyAlbums as $album) : ?>
+  <?php foreach ($spotifySomeAlbums as $album) : ?>
     <div class="card">
       <div class="cardpicture2">
         <a href="<?= route_to('user.spotifyAlbum', $album['id']) ?>">
@@ -64,7 +64,7 @@
   <p>Artis Dari Spotify</p>
 </div>
 <div class="carousel">
-  <?php foreach ($spotifyArtists as $artist) : ?>
+  <?php foreach ($spotifySomeArtists as $artist) : ?>
     <div class="card">
       <div class="cardpicture">
         <a href="<?= route_to('user.spotifyArtist', $artist['id']); ?>">
@@ -85,7 +85,7 @@
   <p>Playlist Dari Spotify</p>
 </div>
 <div class="carousel">
-  <?php foreach ($spotifyPlaylists as $playlist) : ?>
+  <?php foreach ($spotifySomePlaylists as $playlist) : ?>
     <div class="card">
       <div class="cardpicture">
         <a href="<?= route_to('user.spotifyPlaylist', $playlist['id']); ?>">

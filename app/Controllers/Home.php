@@ -20,15 +20,35 @@ class Home extends BaseController
         $artisModel = new ArtisModel();
         $albumModel = new AlbumModel();
 
-        // Fetch data from the database
         $artis = $artisModel->findAll();
         $album = $albumModel->jointoArtis()->findAll();
 
-        // Fetch Spotify data
+
         $accessToken = getSpotifyAccessToken();
-        $spotifyAlbums = fetchSpotifyAlbums($accessToken, 'rock,metal,jazz,country,latin,reggae,classical,pop,');
-        $spotifyArtists = fetchSpotifyArtists($accessToken, 'coldplay,alan walker,marshmello,billie eilish,ariana grande,bruno mars', 6);
-        $spotifyPlaylists = fetchSpotifyPlaylists($accessToken, 'top 50 global, top 50 indonesia, hot hits indonesia');
+        $spotifySomeArtists = fetchSpotifySomeArtists($accessToken, [
+            'alan walker',
+            'marshmello',
+            'coldplay',
+            'ariana grande',
+            'bruno mars',
+            'billie eilish'
+        ]);
+        $spotifySomeAlbums = fetchSpotifySomeAlbums($accessToken, [
+            'monokrom',
+            'hit me hard and soft',
+            'sos',
+            'lover',
+            'manusia',
+            'eternal sunshine'
+        ]);
+        $spotifySomePlaylists = fetchSpotifySomePlaylists($accessToken, [
+            'top 50 indonesia',
+            'top 50 global',
+            'top 50 usa',
+            'hot hits indonesia',
+            'viral 50 indonesia',
+            'viral 50 global'
+        ]);
 
         $username = session()->get('username');
         session()->set('username', $username);
@@ -37,9 +57,9 @@ class Home extends BaseController
             'username' => $username,
             'artis' => $artis,
             'album' => $album,
-            'spotifyAlbums' => $spotifyAlbums['albums']['items'] ?? [],
-            'spotifyArtists' => $spotifyArtists['artists']['items'] ?? [],
-            'spotifyPlaylists' => $spotifyPlaylists['playlists']['items'] ?? [],
+            'spotifySomeAlbums' => $spotifySomeAlbums,
+            'spotifySomeArtists' => $spotifySomeArtists,
+            'spotifySomePlaylists' => $spotifySomePlaylists,
             'accessToken' => $accessToken
         ];
 
@@ -127,14 +147,12 @@ class Home extends BaseController
         $playlistName = $playlist['name'];
     }
 
-    // Set pageTitle based on the referer page
     if ($isArtistPage) {
         $artistName = $track['artists'][0]['name'];
         $pageTitle = $artistName . ' - ' . $track['name'];
     } elseif ($isAlbumPage) {
         $albumId = $track['album']['id'];
 
-        // Get album details to fetch the album name
         $albumUrl = 'https://api.spotify.com/v1/albums/' . $albumId;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $albumUrl);
@@ -250,14 +268,12 @@ class Home extends BaseController
     {
         $laguModel = new LaguModel();
         
-        // Ambil semua lagu dengan join ke tabel artis
+       
         $laguList = $laguModel->joinArtis()->findAll();
         
-        // Jika ada ID lagu yang diberikan, cari lagu tersebut
         if ($id_lagu !== null) {
             $currentLagu = $laguModel->joinArtis()->find($id_lagu);
-        } else {
-            // Jika tidak ada ID lagu yang diberikan, set currentLagu ke lagu pertama dalam antrian
+        } else {        
             $currentLagu = !empty($laguList) ? $laguList[0] : null;
         }
 
@@ -368,7 +384,6 @@ class Home extends BaseController
     {
         $albumModel = new AlbumModel();
         $artisModel = new ArtisModel();
-        // Fetching the album details along with the artist's name
         $album = $albumModel->jointoArtis()->where('album.id_album', $id_album)->first();
 
         $laguModel = new LaguModel();

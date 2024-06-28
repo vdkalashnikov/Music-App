@@ -81,7 +81,7 @@ class AuthController extends BaseController
             if (!$checkPassword) {
                 return redirect()->route('user.login.form')->with('fail', 'Password Salah')->withInput();
             } else {
-                CiAuth::setCiAuth($userInfo); // Baris Penting
+                CiAuth::setCiAuth($userInfo);
                 $username = $userInfo['username'];
                 $name = $userInfo['name'];
                 $picture = $userInfo['picture'];
@@ -219,18 +219,15 @@ class AuthController extends BaseController
                 'token' => $token,
             ]);
         } else {
-            // Dapatkan detail tokens
             $passwordResetPassword = new PasswordResetToken();
             $get_token = $passwordResetPassword->asObject()->where('token', $token)->first();
 
-            //Dapatlan admin detail
             $user = new UserModel();
             $user_info = $user->asObject()->where('email', $get_token->email)->first();
 
             if (!$get_token) {
                 return redirect()->back()->with('fail', 'Token tidak Valid')->withInput();
             } else {
-                //update admin password di database
                 $user->where('email', $user_info->email)
                     ->set(['password' => Hash::make($this->request->getVar('new_password'))])
                     ->update();
@@ -253,10 +250,8 @@ class AuthController extends BaseController
                 );
 
                 if (sendEmail($mailConfig)) {
-                    //Hapus Token
                     $passwordResetPassword->where('email', $user_info->email)->delete();
 
-                    //Redirect dan tampilkan pesan pada laman login
                     return redirect()->route('user.login.form')->with('success', 'Berhasil, Password anda telah berhasil diubah, gunakan password baru untuk login ke sistem');
                 } else {
                     return redirect()->back()->with('fail', 'Ada Sesuatu yang salah!');

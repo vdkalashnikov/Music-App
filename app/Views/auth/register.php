@@ -8,7 +8,33 @@
   <title><?= isset($pageTitle) ? $pageTitle : 'Music App'; ?></title>
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/musiclogoo.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"/>
   <link rel="stylesheet" href="/assets/css/register.css" />
+
+  <style>
+    .password-container {
+      position: relative;
+    }
+
+    .password-container input[type="password"],
+    .password-container input[type="text"] {
+      padding-right: 30px;
+    }
+
+    .password-container .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      display: none;
+      color: white;
+    }
+
+    .password-container.show .toggle-password {
+      display: block;
+    }
+  </style>
 </head>
 
 <body>
@@ -75,11 +101,12 @@
           </div>
         <?php endif; ?>
 
-          <div class="field">
+          <div class="field password-container">
           <svg viewBox="0 0 16 16" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg" class="input-icon">
           <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
           </svg>
-            <input type="password" class="input-field" placeholder="Password" name="password" value="<?= set_value('password'); ?>">
+            <input type="password" class="input-field" placeholder="Password" name="password" value="<?= set_value('password'); ?>" oninput="toggleIconVisibility(this)">
+            <i class="bi bi-eye toggle-password" onclick="togglePasswordVisibility(this)"></i>
           </div>
 
           <?php if ($validation->getError('password')) : ?>
@@ -87,11 +114,12 @@
             <?= $validation->getError('password'); ?>
           </div>
         <?php endif; ?>
-          <div class="field">
+          <div class="field password-container">
           <svg viewBox="0 0 16 16" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg" class="input-icon">
           <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
           </svg>
-            <input type="password" class="input-field" placeholder="Confirm Password" name="confirm_password" value="<?= set_value('confirm_password'); ?>">
+            <input type="password" class="input-field" placeholder="Confirm Password" name="confirm_password" value="<?= set_value('confirm_password'); ?>" oninput="toggleIconVisibility(this)">
+            <i class="bi bi-eye toggle-password" onclick="togglePasswordVisibility(this)"></i>
           </div>
 
           <?php if ($validation->getError('confirm_password')) : ?>
@@ -121,6 +149,29 @@
     }
 
     aleert()
+
+    function togglePasswordVisibility(icon) {
+      var passwordField = icon.previousElementSibling;
+      var passwordFieldType = passwordField.getAttribute("type");
+      if (passwordFieldType === "password") {
+        passwordField.setAttribute("type", "text");
+        icon.classList.remove('bi-eye');
+        icon.classList.add('bi-eye-slash');
+      } else {
+        passwordField.setAttribute("type", "password");
+        icon.classList.remove('bi-eye-slash');
+        icon.classList.add('bi-eye');
+      }
+    }
+
+    function toggleIconVisibility(input) {
+      var passwordContainer = input.parentElement;
+      if (input.value) {
+        passwordContainer.classList.add('show');
+      } else {
+        passwordContainer.classList.remove('show');
+      }
+    }
   </script>
 </body>
 
