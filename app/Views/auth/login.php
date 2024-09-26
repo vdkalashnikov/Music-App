@@ -115,8 +115,8 @@
     aleert();
 
     function togglePasswordVisibility(icon) {
-      var passwordField = icon.previousElementSibling;
-      var passwordFieldType = passwordField.getAttribute("type");
+      let passwordField = icon.previousElementSibling;
+      let passwordFieldType = passwordField.getAttribute("type");
       if (passwordFieldType === "password") {
         passwordField.setAttribute("type", "text");
         icon.classList.remove('bi-eye');
@@ -129,7 +129,7 @@
     }
 
     function toggleIconVisibility(input) {
-      var passwordContainer = input.parentElement;
+      let passwordContainer = input.parentElement;
       if (input.value) {
         passwordContainer.classList.add('show');
       } else {

@@ -22,7 +22,7 @@
             <?= get_user()->username; ?>
         </p>
         <p class="user-email">
-            <?= get_user()->email; ?>
+            <?= get_user()->email; ?> 
         </p>
         <p class="user-bio">
             <?= get_user()->bio; ?>

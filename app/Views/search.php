@@ -38,7 +38,7 @@ function displayResults(result) {
         });
     }
 
-    // Display Local Artists
+   
     if (result.local.artists.length > 0) {
        
         $.each(result.local.artists, function(i, artist) {
@@ -55,7 +55,7 @@ function displayResults(result) {
         });
     }
 
-    // Display Local Albums
+ 
     if (result.local.albums.length > 0) {
     
         $.each(result.local.albums, function(i, album) {
@@ -72,7 +72,7 @@ function displayResults(result) {
         });
     }
 
-    // Display Spotify Tracks
+
     if (result.spotify.tracks.length > 0) {
 
         $.each(result.spotify.tracks, function(i, track) {
@@ -92,7 +92,6 @@ function displayResults(result) {
         $('#search-results').append('<h3>No tracks found</h3>');
     }
 
-    // Handle Spotify Artists
     if (result.spotify.artists.length > 0) {
         
         let artists = result.spotify.artists;
@@ -112,7 +111,7 @@ function displayResults(result) {
         $('#search-results').append('<h3>No artists found</h3>');
     }
 
-    // Handle Spotify Albums
+
     if (result.spotify.albums.length > 0) {
        
         let albums = result.spotify.albums;
@@ -133,7 +132,6 @@ function displayResults(result) {
         $('#search-results').append('<h3>No albums found</h3>');
     }
 
-    // Handle Spotify Playlists
     if (result.spotify.playlists.length > 0) {
   
         let playlists = result.spotify.playlists;
@@ -172,7 +170,7 @@ function searchSpotify() {
             'query': query
         },
         success: function(result) {
-            // Save results and query to local storage
+  
             localStorage.setItem('searchResults', JSON.stringify(result));
             localStorage.setItem('searchQuery', query);
             displayResults(result);
@@ -194,7 +192,7 @@ $('#search-input').on('keyup', function(e) {
     }
 });
 
-// Load search results and query from local storage if available
+
 $(document).ready(function() {
     const savedQuery = localStorage.getItem('searchQuery');
     const savedResults = localStorage.getItem('searchResults');
@@ -232,5 +230,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
 </script>
 
 <?= $this->endSection(); ?>
-<!-- $('#search-results').append('<h3 id="judul">Playlists</h3>'); -->
+
  
