@@ -74,29 +74,14 @@
         </a>
       </div>
       <div class="namealbum"><?= $artist['name']; ?></div>
-      <!-- <div class="namealbum"><?= $artist['genres'][0] ?? 'Unknown'; ?></div> -->
+      <div class="namealbum"><?= $artist['genres'][0] ?? 'Unknown'; ?></div>
     </div>
   <?php endforeach; ?>
 </div>
 
 <br>
 
-<div class="artitle">
-  <p>Playlist Dari Spotify</p>
-</div>
-<div class="carousel">
-  <?php foreach ($spotifySomePlaylists as $playlist) : ?>
-    <div class="card">
-      <div class="cardpicture">
-        <a href="<?= route_to('user.spotifyPlaylist', $playlist['id']); ?>">
-          <img src="<?= $playlist['images'][0]['url']; ?>" alt="<?= $playlist['name']; ?>">
-        </a>
-      </div>
-      <div class="namealbum"><?= $playlist['name']; ?></div>
-      <div class="namealbum"><?= $playlist['owner']['display_name']; ?></div>
-    </div>
-  <?php endforeach; ?>
-</div>
+
 
 <?= $this->endSection(); ?>
 

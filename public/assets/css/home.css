@@ -29,7 +29,6 @@ body {
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     width: 100%;
-    /* border: solid 2px; */
     justify-content: start;
 }
 

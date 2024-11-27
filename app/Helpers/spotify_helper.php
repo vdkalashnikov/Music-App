@@ -3,8 +3,8 @@
 if (!function_exists('getSpotifyAccessToken')) {
     function getSpotifyAccessToken()
     {
-        $clientId = '';
-        $clientSecret = '';
+        $clientId = env('client.id.spotify');
+        $clientSecret = env('client.secret.key');
         $url = 'https://accounts.spotify.com/api/token';
 
         $headers = [

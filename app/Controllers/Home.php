@@ -41,14 +41,14 @@ class Home extends BaseController
             'manusia',
             'eternal sunshine'
         ]);
-        $spotifySomePlaylists = fetchSpotifySomePlaylists($accessToken, [
-            'top 50 indonesia',
-            'top 50 global',
-            'top 50 usa',
-            'hot hits indonesia',
-            'viral 50 indonesia',
-            'viral 50 global'
-        ]);
+        // $spotifySomePlaylists = fetchSpotifySomePlaylists($accessToken, [
+        //     'top 50 indonesia',
+        //     'top 50 global',
+        //     'top 50 usa',
+        //     'hot hits indonesia',
+        //     'viral 50 indonesia',
+        //     'viral 50 global'
+        // ]);
 
         $username = session()->get('username');
         session()->set('username', $username);
@@ -59,7 +59,7 @@ class Home extends BaseController
             'album' => $album,
             'spotifySomeAlbums' => $spotifySomeAlbums,
             'spotifySomeArtists' => $spotifySomeArtists,
-            'spotifySomePlaylists' => $spotifySomePlaylists,
+            // 'spotifySomePlaylists' => $spotifySomePlaylists,
             'accessToken' => $accessToken
         ];
 
@@ -105,82 +105,82 @@ class Home extends BaseController
 
 
     public function spotifyTrack($trackId)
-{
-    $accessToken = getSpotifyAccessToken();
-    $url = 'https://api.spotify.com/v1/tracks/' . $trackId;
+    {
+        $accessToken = getSpotifyAccessToken();
+        $url = 'https://api.spotify.com/v1/tracks/' . $trackId;
 
-    $headers = [
-        'Authorization: Bearer ' . $accessToken,
-    ];
+        $headers = [
+            'Authorization: Bearer ' . $accessToken,
+        ];
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    $result = curl_exec($ch);
-    curl_close($ch);
-
-    $track = json_decode($result, true);
-
-    $referer = $this->request->getServer('HTTP_REFERER');
-    $isArtistPage = strpos($referer, 'spotifyArtist') !== false;
-    $isAlbumPage = strpos($referer, 'spotify/album') !== false;
-    $isPlaylistPage = strpos($referer, 'spotify/playlist') !== false;
-
-    $playlistId = null;
-    $playlistName = null;
-
-    if ($isPlaylistPage) {
-        $urlComponents = explode('/', $referer);
-        $playlistId = end($urlComponents);
-
-        // Get playlist details to fetch the playlist name
-        $playlistUrl = 'https://api.spotify.com/v1/playlists/' . $playlistId;
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $playlistUrl);
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        $playlistResult = curl_exec($ch);
+        $result = curl_exec($ch);
         curl_close($ch);
 
-        $playlist = json_decode($playlistResult, true);
-        $playlistName = $playlist['name'];
+        $track = json_decode($result, true);
+
+        $referer = $this->request->getServer('HTTP_REFERER');
+        $isArtistPage = strpos($referer, 'spotifyArtist') !== false;
+        $isAlbumPage = strpos($referer, 'spotify/album') !== false;
+        $isPlaylistPage = strpos($referer, 'spotify/playlist') !== false;
+
+        $playlistId = null;
+        $playlistName = null;
+
+        if ($isPlaylistPage) {
+            $urlComponents = explode('/', $referer);
+            $playlistId = end($urlComponents);
+
+            // Get playlist details to fetch the playlist name
+            $playlistUrl = 'https://api.spotify.com/v1/playlists/' . $playlistId;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $playlistUrl);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            $playlistResult = curl_exec($ch);
+            curl_close($ch);
+
+            $playlist = json_decode($playlistResult, true);
+            $playlistName = $playlist['name'];
+        }
+
+        if ($isArtistPage) {
+            $artistName = $track['artists'][0]['name'];
+            $pageTitle = $artistName . ' - ' . $track['name'];
+        } elseif ($isAlbumPage) {
+            $albumId = $track['album']['id'];
+
+            $albumUrl = 'https://api.spotify.com/v1/albums/' . $albumId;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $albumUrl);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            $albumResult = curl_exec($ch);
+            curl_close($ch);
+
+            $album = json_decode($albumResult, true);
+            $albumName = $album['name'];
+            $pageTitle = $albumName . ' - ' . $track['name'];
+        } elseif ($isPlaylistPage) {
+            $pageTitle = $playlistName . ' - ' . $track['name'];
+        } else {
+            $pageTitle = $track['name'];
+        }
+
+        $data = [
+            'track' => $track,
+            'pageTitle' => $pageTitle,
+            'isArtistPage' => $isArtistPage,
+            'isAlbumPage' => $isAlbumPage,
+            'isPlaylistPage' => $isPlaylistPage,
+            'playlistId' => $playlistId
+        ];
+
+        return view('spotify_track', $data);
     }
-
-    if ($isArtistPage) {
-        $artistName = $track['artists'][0]['name'];
-        $pageTitle = $artistName . ' - ' . $track['name'];
-    } elseif ($isAlbumPage) {
-        $albumId = $track['album']['id'];
-
-        $albumUrl = 'https://api.spotify.com/v1/albums/' . $albumId;
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $albumUrl);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        $albumResult = curl_exec($ch);
-        curl_close($ch);
-
-        $album = json_decode($albumResult, true);
-        $albumName = $album['name'];
-        $pageTitle = $albumName . ' - ' . $track['name'];
-    } elseif ($isPlaylistPage) {
-        $pageTitle = $playlistName . ' - ' . $track['name'];
-    } else {
-        $pageTitle = $track['name'];
-    }
-
-    $data = [
-        'track' => $track,
-        'pageTitle' => $pageTitle,
-        'isArtistPage' => $isArtistPage,
-        'isAlbumPage' => $isAlbumPage,
-        'isPlaylistPage' => $isPlaylistPage,
-        'playlistId' => $playlistId
-    ];
-
-    return view('spotify_track', $data);
-}
 
 
 
@@ -267,13 +267,13 @@ class Home extends BaseController
     public function laguById($id_lagu = null)
     {
         $laguModel = new LaguModel();
-        
-       
+
+
         $laguList = $laguModel->joinArtis()->findAll();
-        
+
         if ($id_lagu !== null) {
             $currentLagu = $laguModel->joinArtis()->find($id_lagu);
-        } else {        
+        } else {
             $currentLagu = !empty($laguList) ? $laguList[0] : null;
         }
 
@@ -574,187 +574,41 @@ class Home extends BaseController
     }
 
     public function searchSpotify()
-{
-    helper('spotify_helper');
+    {
+        helper('spotify_helper');
 
-    $query = $this->request->getPost('query');
+        $query = $this->request->getPost('query');
 
-    // Spotify data fetching
-    $accessToken = getSpotifyAccessToken();
-    $spotifyArtists = fetchSpotifyArtists($accessToken, $query);
-    $spotifyAlbums = fetchSpotifyAlbums($accessToken, $query);
-    $spotifyPlaylists = fetchSpotifyPlaylists($accessToken, $query);
-    $spotifyTracks = fetchSpotifyTracks($accessToken, $query);
+        // Spotify data fetching
+        $accessToken = getSpotifyAccessToken();
+        $spotifyArtists = fetchSpotifyArtists($accessToken, $query);
+        $spotifyAlbums = fetchSpotifyAlbums($accessToken, $query);
+        $spotifyPlaylists = fetchSpotifyPlaylists($accessToken, $query);
+        $spotifyTracks = fetchSpotifyTracks($accessToken, $query);
 
-    // Local database searching
-    $laguModel = new LaguModel();
-    $artisModel = new ArtisModel();
-    $albumModel = new AlbumModel();
+        // Local database searching
+        $laguModel = new LaguModel();
+        $artisModel = new ArtisModel();
+        $albumModel = new AlbumModel();
 
-    $localTracks = $laguModel->like('nama_lagu', $query)->findAll();
-    $localArtists = $artisModel->like('nama', $query)->findAll();
-    $localAlbums = $albumModel->like('nama_album', $query)->findAll();
+        $localTracks = $laguModel->like('nama_lagu', $query)->findAll();
+        $localArtists = $artisModel->like('nama', $query)->findAll();
+        $localAlbums = $albumModel->like('nama_album', $query)->findAll();
 
-    $result = [
-        'spotify' => [
-            'artists' => $spotifyArtists['artists']['items'] ?? [],
-            'albums' => $spotifyAlbums['albums']['items'] ?? [],
-            'playlists' => $spotifyPlaylists['playlists']['items'] ?? [],
-            'tracks' => $spotifyTracks['tracks']['items'] ?? []
-        ],
-        'local' => [
-            'tracks' => $localTracks,
-            'artists' => $localArtists,
-            'albums' => $localAlbums
-        ]
-    ];
+        $result = [
+            'spotify' => [
+                'artists' => $spotifyArtists['artists']['items'] ?? [],
+                'albums' => $spotifyAlbums['albums']['items'] ?? [],
+                'playlists' => $spotifyPlaylists['playlists']['items'] ?? [],
+                'tracks' => $spotifyTracks['tracks']['items'] ?? []
+            ],
+            'local' => [
+                'tracks' => $localTracks,
+                'artists' => $localArtists,
+                'albums' => $localAlbums
+            ]
+        ];
 
-    return $this->response->setJSON($result);
+        return $this->response->setJSON($result);
+    }
 }
-
-
-}
-
-
-// if ($id_album !== null) {
-//     $laguListt = $laguModel->getLaguListByAlbum($id_album);
-//     $currenttLagu = $laguModel->getLaguByIdLagu($id_lagu);
-//     $album = $albumModel->find($id_album);
-// } else {
-//     $laguListt = [];
-//     $currenttLagu = null;
-//     $album = null;
-// }
-
-
- // if ($album !== null && $currenttLagu !== null) {
-        //     $pageTitle = $album['nama_album'] . " - " . $currenttLagu['nama_lagu'];
-        // } elseif ($currenttLagu !== null) {
-        //     $pageTitle = $currenttLagu['nama_lagu'];
-        // } else {
-        //     $pageTitle = "Lagu";
-        // }
-
-// if( $file->move($path,$new_filename)) {
-        //     if ( $old_picture != null && file_exists($path.$old_picture)){
-        //         unlink($path.$old_picture);
-        //     }
-        //     $user->where('id', $user_info->id)
-        //     ->set(['picture'=>$new_filename])
-        //     ->update();
-
-        //     echo json_encode(['status'=>1, 'msg'=>'Selesai!, Foto Profilmu berhasil diganti']);
-        // } else {
-        //     echo json_encode(['status'=>0, 'msg'=>'Gagal, Foto Profilmu gagal diganti']);
-        // }
-
-
-        
-
-
-//     public function updateProfile()
-// {
-//     $validation = \Config\Services::validation();
-
-//     // $rules = $this->validate([
-//     //     'name' => [
-//     //         'rules' => 'required',
-//     //         'errors' => [
-//     //             'required' => 'Nama diperlukan'
-//     //         ]
-//     //     ],
-//     //     'username' => [
-//     //         'rules' => 'required|min_length[4]|is_unique[user.username,id,{id}]',
-//     //         'errors' => [
-//     //             'required' => 'username diperlukan',
-//     //             'min_length' => 'Terlalu sedikit, minimal 4 karakter',
-//     //             'is_unique' => 'Ganti username dengan yang baru'
-//     //         ]
-//     //     ],
-//     //     'bio' => [
-//     //         'rules' => 'max_length[255]',
-//     //         'errors' => [
-//     //             'max_length' => 'Terlalu panjang!'
-//     //         ]
-//     //     ],
-//     // ]);
-
-//     // if (!$rules) {
-//     //     $userModel = new UserModel();
-//     //     $data = [
-//     //         'pageTitle' => 'Edit Data Barang',
-//     //         'validation' => $this->validator
-//     //     ];
-
-//     //     return view('pengolahan_lab/edit_data_barang', $data);
-
-//     $data = [
-//         'name' => $this->request->getPost('name'),
-//         'username' => $this->request->getPost('username'),
-//         'bio' => $this->request->getPost('bio'),
-//     ];
-
-//     $validation->setRules([
-//         'name' => 'required',
-//         'username' => 'required|min_length[3]|is_unique[user.username,id,{id}]',
-//         'bio' => 'max_length[255]',
-//     ]);
-
-//     if (!$validation->run($data)) {
-//         return redirect()->route('user.profile')->with('fail', $validation->listErrors());
-//     }
-
-//     $userModel = new UserModel();
-//     $userId = CiAuth::id();
-
-//     if ($userModel->update($userId, $data)) {
-//         return redirect()->route('user.profile')->with('success', 'Profile berhasil diupdate.');
-//     } else {
-//         return redirect()->route('user.profile')->with('fail', 'Profile gagal diupdate.');
-//     }
-// }
-
-//     public function updatePersonalDetails()
-// {
-//     $request =  \Config\Services::request();
-//     $validation = \Config\Services::validation();
-//     $user_id = CiAuth::id();
-
-//     if( $request->isAJAX()) {
-//         $this->validate([
-//             'name' => [  
-//                 'rules' => 'required',
-//                 'errors' => [
-//                     'required' => 'Name diperlukan'
-//                 ]
-//             ],
-//             'username' => [
-//                 'rules' => 'required|min_length[4]|is_unique[user.username,id,'.$user_id.']',
-//                 'errors' => [
-//                     'required' => 'Username diperlukan',
-//                     'min_length' => 'Username minimal 4 karakter',
-//                 ]
-//             ]
-//         ]);
-
-//         if ($validation->run() == FALSE ) {
-//             $errors = $validation->getErrors();
-//             return $this->response->setJSON(['status' => 0, 'error' => $errors]);
-//         } else {
-//             $user = new UserModel();
-//             $update = $user->where('id', $user_id)
-//                 ->set([
-//                     'name' => $request->getVar('name'),
-//                     'username' => $request->getVar('username'),
-//                     'bio' => $request->getVar('bio')
-//                 ])->update();
-
-//             if ($update) {
-//                 $user_info = $user->find($user_id);
-//                 return $this->response->setJSON(['status' => 1, 'user_info' => $user_info, 'msg' => 'Detail Pribadi berhasil diperbarui']);
-//             } else {
-//                 return $this->response->setJSON(['status' => 0, 'msg' => 'Ada yang salah']);
-//             }
-//         }
-//     }
-// }
