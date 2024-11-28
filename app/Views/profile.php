@@ -1,7 +1,6 @@
 <?= $this->extend('/layout/profile_layout'); ?>
 <?= $this->section('content'); ?>
 
-
 <section class="section1">
     <div class="cont1">
         <div class="isi">
@@ -104,13 +103,11 @@
             <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>" class="ci_csrf_data">
             <?= csrf_field(); ?>
 
-
             <div class="mb-2">
                 <label for="exampleInputEmail1" class="form-label">Password Sebelumnya</label>
                 <input type="password" class="form-control" id="exampleInputpassword" placeholder="Password Sebelumnya..." name="current_password">
                 <span class="text-danger error-text current_password_error"></span>
             </div>
-
 
             <div class="mb-2">
                 <label for="exampleInputPassword1" class="form-label">Password Baru</label>
@@ -123,7 +120,6 @@
                 <input type="password" class="form-control" id="exampleInputUserpassword" placeholder="Konfirmasi Password Baru..." name="confirm_new_password">
                 <span class="text-danger error-text confirm_new_password_error"></span>
             </div>
-
 
             <button type="submit" class="btn btn-primary">Ubah Password</button>
         </form>
@@ -226,41 +222,3 @@
 </script>
 
 <?= $this->endSection(); ?>
-
-
-<!-- <script>
-    $('#personal_details_from').on('submit', function(e){
-        e.preventDefault();
-        var form = this;
-        var formdata = new FormData(form);
-
-        $.ajax({
-            url:$(form).attr('action'),
-            method:$(form).attr('method'),
-            data:formdata,
-            processData:false,
-            dataType:'json',
-            contentType:'false',
-            beforeSend:function(){
-                toastr.remove();
-                $(form).find('span.error-text').text('');
-            },
-            success:function(response){
-                if( $.isEmptyObject(response.error) ){
-                    if( response.status == 1 ){
-                        $('.user-name').each(function() {
-                            $(this).html(response.user_info.name);
-                        });
-                        toastr.success(response.msg);
-                    } else {
-                        toastr.error(response.msg);
-                    } 
-                } else {
-                    $.each(response.error, function(prefix, val){
-                        $(form).find('span.'+prefix+'_error').text(val);
-                    });
-                }
-            }
-        });
-    });
-</script> -->

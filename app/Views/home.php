@@ -9,36 +9,13 @@
 <div class="artitle">
   <p>Artis Terpopuler</p>
 </div>
-<div class="carousel">
-    <?php foreach ($artis as $a) : ?>
-        <div class="card">
-            <div class="cardpicture">
-                <a href="<?= route_to('user.artis', $a['id_artis']) ?>">
-                    <img src="<?= base_url('image/' . $a['picture']); ?>">
-                </a>
-            </div>
-            <div class="nameart"><?= $a['nama']; ?></div>
-        </div>
-    <?php endforeach; ?>
-</div>
+<?= view('components/artistCarousel', ['items' => $artis]) ?>
 
 <br>
 <div class="artitle">
   <p>Album Terpopuler</p>
 </div>
-<div class="carousel">
-  <?php foreach ($album as $ab) : ?>
-    <div class="card">
-      <div class="cardpicture2">
-        <a href="<?= route_to('user.album', $ab['id_album']) ?>">
-          <img src="<?= base_url('img_album/' . $ab['gambar_album']); ?>">
-        </a>
-      </div>
-      <div class="namealbum"><?= $ab['nama_album']; ?></div>
-      <div class="nameart"><?= $ab['nama']; ?></div>
-    </div>
-  <?php endforeach; ?>
-</div>
+<?= view('components/albumCarousel', ['items' => $album]); ?>
 
 <br>
 <div class="artitle">
@@ -87,8 +64,8 @@
 
 <?= $this->section('scripts'); ?>
 <script>
-    const swalElement = document.querySelector('.swal'); // Mengambil elemen dengan kelas '.swal'
-    const swalData = swalElement.dataset.swal; // Mengambil data dari atribut data HTML 'data-swal'
+    const swalElement = document.querySelector('.swal');
+    const swalData = swalElement.dataset.swal;
 
     if (swalData) {
         Swal.fire({
