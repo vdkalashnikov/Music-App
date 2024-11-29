@@ -12,8 +12,8 @@ $routes->group('user', static function ($routes) {
         $routes->get('home', 'Home::index', ['as' => 'user.home']);
         $routes->get('logout', 'Home::logoutUserHandler', ['as' => 'user.logout']);
         $routes->get('laguById/(:any)', 'Home::laguById/$1', ['as' => 'user.lagu.track']);
-        $routes->get('lagu/(:any)/(:any)', 'Home::lagu/$1/$2', ['as' => 'user.lagu']);
-        $routes->get('lagu_album/(:any)/(:any)', 'Home::laguByAlbum/$1/$2', ['as' => 'user.lagu.album']);
+        $routes->get('lagu/(:any)/(:any)', 'Lagu::lagu/$1/$2', ['as' => 'user.lagu']);
+        $routes->get('lagu_album/(:any)/(:any)', 'Lagu::laguByAlbum/$1/$2', ['as' => 'user.lagu.album']);
         $routes->get('api/songs', 'Home::getSongs');
         $routes->get('artis/(:any)', 'Artis::index/$1', ['as' => 'user.artis']);
         $routes->get('album/(:any)', 'Album::index/$1', ['as' => 'user.album']);

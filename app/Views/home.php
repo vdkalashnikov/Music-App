@@ -19,42 +19,7 @@
 
 <br>
 
-<div class="artitle">
-  <p>Album Dari Spotify</p>
-</div>
-<div class="carousel">
-  <?php foreach ($spotifySomeAlbums as $album) : ?>
-    <div class="card">
-      <div class="cardpicture2">
-        <a href="<?= route_to('user.spotifyAlbum', $album['id']) ?>">
-          <img src="<?= $album['images'][0]['url']; ?>" alt="<?= $album['name']; ?>">
-        </a>
-      </div>
-      <div class="namealbum"><?= $album['name']; ?></div>
-      <div class="nameart"><?= $album['artists'][0]['name']; ?></div>
-    </div>
-  <?php endforeach; ?>
-</div>
-<br>
 
-<div class="artitle">
-  <p>Artis Dari Spotify</p>
-</div>
-<div class="carousel">
-  <?php foreach ($spotifySomeArtists as $artist) : ?>
-    <div class="card">
-      <div class="cardpicture">
-        <a href="<?= route_to('user.spotifyArtist', $artist['id']); ?>">
-          <?php if (isset($artist['images'][0]['url'])): ?>
-              <img src="<?= $artist['images'][0]['url']; ?>" alt="<?= $artist['name']; ?>">
-          <?php endif; ?>
-        </a>
-      </div>
-      <div class="namealbum"><?= $artist['name']; ?></div>
-      <div class="namealbum"><?= $artist['genres'][0] ?? 'Unknown'; ?></div>
-    </div>
-  <?php endforeach; ?>
-</div>
 
 <?= $this->endSection(); ?>
 

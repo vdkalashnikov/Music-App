@@ -23,22 +23,22 @@ class Home extends BaseController
         $album = $albumModel->jointoArtis()->findAll();
 
         $accessToken = getSpotifyAccessToken();
-        $spotifySomeArtists = fetchSpotifySomeArtists($accessToken, [
-            'alan walker',
-            'marshmello',
-            'coldplay',
-            'ariana grande',
-            'bruno mars',
-            'billie eilish'
-        ]);
-        $spotifySomeAlbums = fetchSpotifySomeAlbums($accessToken, [
-            'monokrom',
-            'hit me hard and soft',
-            'sos',
-            'lover',
-            'manusia',
-            'eternal sunshine'
-        ]);
+        // $spotifySomeArtists = fetchSpotifySomeArtists($accessToken, [
+        //     'alan walker',
+        //     'marshmello',
+        //     'coldplay',
+        //     'ariana grande',
+        //     'bruno mars',
+        //     'billie eilish'
+        // ]);
+        // $spotifySomeAlbums = fetchSpotifySomeAlbums($accessToken, [
+        //     'monokrom',
+        //     'hit me hard and soft',
+        //     'sos',
+        //     'lover',
+        //     'manusia',
+        //     'eternal sunshine'
+        // ]);
         // $spotifySomePlaylists = fetchSpotifySomePlaylists($accessToken, [
         //     'top 50 indonesia',
         //     'top 50 global',
@@ -55,9 +55,8 @@ class Home extends BaseController
             'username' => $username,
             'artis' => $artis,
             'album' => $album,
-
-            'spotifySomeAlbums' => $spotifySomeAlbums,
-            'spotifySomeArtists' => $spotifySomeArtists,
+            // 'spotifySomeAlbums' => $spotifySomeAlbums,
+            // 'spotifySomeArtists' => $spotifySomeArtists,
             // 'spotifySomePlaylists' => $spotifySomePlaylists,
             'accessToken' => $accessToken
         ];
@@ -284,76 +283,6 @@ class Home extends BaseController
 
         return view('lagu2', $data);
     }
-
-
-    public function lagu($id_artis = null, $id_lagu = null)
-    {
-        $laguModel = new LaguModel();
-        $artisModel = new ArtisModel();
-        $albumModel = new AlbumModel();
-
-        if ($id_artis !== null) {
-            $laguList = $laguModel->getLaguListByArtis($id_artis);
-            $currentLagu = $laguModel->getLaguById($id_lagu);
-            $artis = $artisModel->find($id_artis);
-        } else {
-            $laguList = [];
-            $currentLagu = null;
-            $artis = null;
-        }
-
-        if ($artis !== null && $currentLagu !== null) {
-            $pageTitle = $artis['name'] . " - " . $currentLagu['nama_lagu'];
-        } elseif ($currentLagu !== null) {
-            $pageTitle = $currentLagu['nama_lagu'];
-        } else {
-            $pageTitle = "Lagu";
-        }
-
-        $data = [
-            'laguList' => $laguList,
-            'currentLagu' => $currentLagu,
-            'artis' => $artis,
-            'album' => null,
-            'pageTitle' => $pageTitle
-        ];
-        return view('lagu', $data);
-    }
-
-
-    public function laguByAlbum($id_album = null, $id_lagu = null)
-    {
-        $laguModel = new LaguModel();
-        $albumModel = new AlbumModel();
-
-        if ($id_album !== null) {
-            $laguList = $laguModel->getLaguListByAlbum($id_album);
-            $currentLagu = $laguModel->getLaguById($id_lagu);
-            $album = $albumModel->jointoArtis()->find($id_album);
-        } else {
-            $laguList = [];
-            $currentLagu = null;
-            $album = null;
-        }
-
-        if ($album !== null && $currentLagu !== null) {
-            $pageTitle = $album['name'] . " - " . $currentLagu['nama_lagu'];
-        } elseif ($currentLagu !== null) {
-            $pageTitle = $currentLagu['nama_lagu'];
-        } else {
-            $pageTitle = "Lagu";
-        }
-
-        $data = [
-            'laguList' => $laguList,
-            'currentLagu' => $currentLagu,
-            'album' => $album,
-            'artis' => null,
-            'pageTitle' => $pageTitle
-        ];
-        return view('lagu', $data);
-    }
-
 
     public function getSongs()
     {

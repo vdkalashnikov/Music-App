@@ -30,9 +30,13 @@ class LaguModel extends Model
             ->join('album', 'album.id_album = lagu.id_album', 'left');
     }
 
+    public function getLagu() {
+        return $this->select('lagu.*, artis.name as name_artis')->join('artis', 'artis.id = lagu.artis_id', 'left');
+    }
+
     public function getLaguListByArtis($id_artis)
     {
-        return $this->select('lagu.*, artis.name as artis_name')
+        return $this->select('lagu.*, artis.name as name_artis')
             ->join('artis', 'artis.id = lagu.artis_id', 'left')
             ->where('lagu.artis_id', $id_artis)
             ->findAll();
@@ -40,17 +44,16 @@ class LaguModel extends Model
 
     public function getLaguListByAlbum($id_album)
     {
-        return $this->select('lagu.*, artis.name as name_artis') // Menggunakan alias nama
+        return $this->select('lagu.*, artis.name as name_artis')
             ->join('artis', 'artis.id = lagu.artis_id', 'left')
             ->where('lagu.album_id', $id_album)
             ->findAll();
     }
 
-
     public function getLaguById($id_lagu)
     {
-        return $this->select('lagu.*, artis.nama as nama')
-            ->join('artis', 'artis.id_artis = lagu.id_artis', 'left')
+        return $this->select('lagu.*, artis.name as name_artis')
+            ->join('artis', 'artis.id = lagu.artis_id', 'left')
             ->where('lagu.id', $id_lagu)
             ->first();
     }
