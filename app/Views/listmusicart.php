@@ -1,5 +1,3 @@
-
-
 <?= $this->extend('/layout/listmusic_layout'); ?>
 <?= $this->section('content'); ?>
 
@@ -7,12 +5,12 @@
     <div class="contain">
         <div class="column1">
             <div class="incolumn1">
-                <img src="<?= base_url('assets/img/' . $artis['artimg']); ?>" alt="<?= $artis['nama']; ?>">
+                <img src="<?= base_url('assets/img/' . $artis['artimg']); ?>" alt="<?= $artis['name']; ?>">
             </div>
         </div>
         <div class="column2">
             <div class="incolumn2">
-                <h2><?= $artis['nama']; ?></h2>
+                <h2><?= $artis['name']; ?></h2>
             </div>
         </div>
     </div>
@@ -32,18 +30,18 @@
                     <tr data-index="<?= $index; ?>">
                         <th scope="row"><?= $index + 1; ?></th>
                         <td>
-                            <a href="<?= route_to('user.lagu', $l['id_artis'], $l['id']); ?>" class="play-song">
-                                <img src="<?= base_url('image/' . $l['gambar']); ?>" alt="<?= $l['nama_lagu']; ?>" style="width: 50px;">
+                            <a href="<?= route_to('user.lagu', $l['artis_id'], $l['id']); ?>" class="play-song">
+                                <img src="<?= base_url('image/' . $l['image']); ?>" alt="<?= $l['name']; ?>" style="width: 50px;">
                             </a>
                         </td>
                         <td>
-                            <a href="<?= route_to('user.lagu', $l['id_artis'], $l['id']); ?>" class="play-song">
-                                <?= $l['nama_lagu']; ?>
+                            <a href="<?= route_to('user.lagu', $l['artis_id'], $l['id']); ?>" class="play-song">
+                                <?= $l['name']; ?>
                             </a>
                         </td>
 
                         <td>
-                            <a href="<?= route_to('user.lagu', $l['id_artis'], $l['id']); ?>" class="play-song">
+                            <a href="<?= route_to('user.lagu', $l['artis_id'], $l['id']); ?>" class="play-song">
                                 <?= $l['durasi']; ?>
                             </a>
                         </td>
@@ -59,7 +57,6 @@
 
 <?= $this->section('scripts'); ?>
 <script>
-
     document.addEventListener('DOMContentLoaded', (event) => {
         const logoutLink = document.getElementById('logout');
 

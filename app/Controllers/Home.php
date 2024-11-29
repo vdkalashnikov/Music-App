@@ -22,7 +22,6 @@ class Home extends BaseController
         $artis = $artisModel->findAll();
         $album = $albumModel->jointoArtis()->findAll();
 
-
         $accessToken = getSpotifyAccessToken();
         $spotifySomeArtists = fetchSpotifySomeArtists($accessToken, [
             'alan walker',
@@ -56,6 +55,7 @@ class Home extends BaseController
             'username' => $username,
             'artis' => $artis,
             'album' => $album,
+
             'spotifySomeAlbums' => $spotifySomeAlbums,
             'spotifySomeArtists' => $spotifySomeArtists,
             // 'spotifySomePlaylists' => $spotifySomePlaylists,
@@ -362,46 +362,6 @@ class Home extends BaseController
 
         return $this->response->setJSON($lagu);
     }
-
-    public function artis($id_artis)
-    {
-        $artisModel = new ArtisModel();
-        $artis = $artisModel->find($id_artis);
-
-        $laguModel = new LaguModel();
-        $lagu = $laguModel->getLaguListByArtis($id_artis);
-
-        $data = [
-            'artis' => $artis,
-            'lagu' => $lagu,
-            'pageTitle' => isset($artis['name']) ? $artis['name'] : 'Artis'
-        ];
-
-        return view('listmusicart', $data);
-    }
-    public function album($id_album)
-    {
-        $albumModel = new AlbumModel();
-        $artisModel = new ArtisModel();
-        $album = $albumModel->jointoArtis()->where('album.id', $id_album)->first();
-
-        $laguModel = new LaguModel();
-        $lagu = $laguModel->getLaguListByAlbum($id_album);
-        $jumlahLagu = $laguModel->countLaguByAlbum($id_album);
-        $totalDuration = $laguModel->getTotalDurationByAlbum($id_album);
-
-        $data = [
-            'album' => $album,
-            'lagu' => $lagu,
-            'artis' => $artisModel,
-            'jumlahLagu' => $jumlahLagu,
-            'totalDuration' => $totalDuration,
-            'pageTitle' => isset($album['name']) ? $album['name'] : 'Album'
-        ];
-
-        return view('listmusicalbum', $data);
-    }
-
 
     public function logoutUserHandler()
     {

@@ -15,8 +15,8 @@ $routes->group('user', static function ($routes) {
         $routes->get('lagu/(:any)/(:any)', 'Home::lagu/$1/$2', ['as' => 'user.lagu']);
         $routes->get('lagu_album/(:any)/(:any)', 'Home::laguByAlbum/$1/$2', ['as' => 'user.lagu.album']);
         $routes->get('api/songs', 'Home::getSongs');
-        $routes->get('artis/(:any)', 'Home::artis/$1', ['as' => 'user.artis']);
-        $routes->get('album/(:any)', 'Home::album/$1', ['as' => 'user.album']);
+        $routes->get('artis/(:any)', 'Artis::index/$1', ['as' => 'user.artis']);
+        $routes->get('album/(:any)', 'Album::index/$1', ['as' => 'user.album']);
         $routes->get('spotify/album/(:any)', 'Home::spotifyAlbum/$1', ['as' => 'user.spotifyAlbum']);
         $routes->get('spotify/track/(:any)', 'Home::spotifyTrack/$1', ['as' => 'user.spotifyTrack']);
         $routes->get('spotifyArtist/(:any)', 'Home::spotifyArtist/$1', ['as' => 'user.spotifyArtist']);

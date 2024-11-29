@@ -10,11 +10,11 @@ class LaguModel extends Model
     protected $primaryKey = 'id';
     protected $allowedFields = [
         'id',
-        'nama_lagu',
-        'gambar',
-        'file_lagu',
-        'id_artis',
-        'id_album',
+        'name',
+        'image',
+        'file',
+        'artis_id',
+        'album_id',
         'durasi'
     ];
 
@@ -32,17 +32,17 @@ class LaguModel extends Model
 
     public function getLaguListByArtis($id_artis)
     {
-        return $this->select('lagu.*, artis.nama as nama')
-            ->join('artis', 'artis.id_artis = lagu.id_artis', 'left')
-            ->where('lagu.id_artis', $id_artis)
+        return $this->select('lagu.*, artis.name as artis_name')
+            ->join('artis', 'artis.id = lagu.artis_id', 'left')
+            ->where('lagu.artis_id', $id_artis)
             ->findAll();
     }
 
     public function getLaguListByAlbum($id_album)
     {
-        return $this->select('lagu.*, artis.nama as nama') // Menggunakan alias nama
-            ->join('artis', 'artis.id_artis = lagu.id_artis', 'left')
-            ->where('lagu.id_album', $id_album)
+        return $this->select('lagu.*, artis.name as name_artis') // Menggunakan alias nama
+            ->join('artis', 'artis.id = lagu.artis_id', 'left')
+            ->where('lagu.album_id', $id_album)
             ->findAll();
     }
 
@@ -64,12 +64,12 @@ class LaguModel extends Model
 
     public function countLaguByAlbum($id_album)
     {
-        return $this->where('id_album', $id_album)->countAllResults();
+        return $this->where('album_id', $id_album)->countAllResults();
     }
 
     public function getTotalDurationByAlbum($id_album)
 {
-    $lagu = $this->where('id_album', $id_album)->findAll();
+    $lagu = $this->where('album_id', $id_album)->findAll();
     $totalDuration = 0;
 
     foreach ($lagu as $l) {
