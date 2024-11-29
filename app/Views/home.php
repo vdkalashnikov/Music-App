@@ -9,15 +9,16 @@
 <div class="artitle">
   <p>Artis Terpopuler</p>
 </div>
-<?= view('components/artistCarousel', ['items' => $artis]) ?>
+<?= view('components/homeCarousel', ['items' => $artis, 'route' => 'user.artis', 'store' => 'image', 'type' => 'artis']) ?>
 
 <br>
 <div class="artitle">
   <p>Album Terpopuler</p>
 </div>
-<?= view('components/albumCarousel', ['items' => $album]); ?>
+<?= view('components/homeCarousel', ['items' => $album, 'route' => 'user.album', 'store' => 'img_album', 'type' => 'album']) ?>
 
 <br>
+
 <div class="artitle">
   <p>Album Dari Spotify</p>
 </div>
@@ -34,7 +35,6 @@
     </div>
   <?php endforeach; ?>
 </div>
-
 <br>
 
 <div class="artitle">
@@ -55,10 +55,6 @@
     </div>
   <?php endforeach; ?>
 </div>
-
-<br>
-
-
 
 <?= $this->endSection(); ?>
 

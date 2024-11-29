@@ -16,7 +16,6 @@ class Home extends BaseController
 
     public function index(): string
     {
-        $laguModel = new LaguModel();
         $artisModel = new ArtisModel();
         $albumModel = new AlbumModel();
 
@@ -304,7 +303,7 @@ class Home extends BaseController
         }
 
         if ($artis !== null && $currentLagu !== null) {
-            $pageTitle = $artis['nama'] . " - " . $currentLagu['nama_lagu'];
+            $pageTitle = $artis['name'] . " - " . $currentLagu['nama_lagu'];
         } elseif ($currentLagu !== null) {
             $pageTitle = $currentLagu['nama_lagu'];
         } else {
@@ -338,7 +337,7 @@ class Home extends BaseController
         }
 
         if ($album !== null && $currentLagu !== null) {
-            $pageTitle = $album['nama_album'] . " - " . $currentLagu['nama_lagu'];
+            $pageTitle = $album['name'] . " - " . $currentLagu['nama_lagu'];
         } elseif ($currentLagu !== null) {
             $pageTitle = $currentLagu['nama_lagu'];
         } else {
@@ -375,7 +374,7 @@ class Home extends BaseController
         $data = [
             'artis' => $artis,
             'lagu' => $lagu,
-            'pageTitle' => isset($artis['nama']) ? $artis['nama'] : 'Artis'
+            'pageTitle' => isset($artis['name']) ? $artis['name'] : 'Artis'
         ];
 
         return view('listmusicart', $data);
@@ -384,7 +383,7 @@ class Home extends BaseController
     {
         $albumModel = new AlbumModel();
         $artisModel = new ArtisModel();
-        $album = $albumModel->jointoArtis()->where('album.id_album', $id_album)->first();
+        $album = $albumModel->jointoArtis()->where('album.id', $id_album)->first();
 
         $laguModel = new LaguModel();
         $lagu = $laguModel->getLaguListByAlbum($id_album);
@@ -397,7 +396,7 @@ class Home extends BaseController
             'artis' => $artisModel,
             'jumlahLagu' => $jumlahLagu,
             'totalDuration' => $totalDuration,
-            'pageTitle' => isset($album['nama_album']) ? $album['nama_album'] : 'Album'
+            'pageTitle' => isset($album['name']) ? $album['name'] : 'Album'
         ];
 
         return view('listmusicalbum', $data);
@@ -592,8 +591,8 @@ class Home extends BaseController
         $albumModel = new AlbumModel();
 
         $localTracks = $laguModel->like('nama_lagu', $query)->findAll();
-        $localArtists = $artisModel->like('nama', $query)->findAll();
-        $localAlbums = $albumModel->like('nama_album', $query)->findAll();
+        $localArtists = $artisModel->like('name', $query)->findAll();
+        $localAlbums = $albumModel->like('name', $query)->findAll();
 
         $result = [
             'spotify' => [

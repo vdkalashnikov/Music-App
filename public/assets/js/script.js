@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         updateTimer = setInterval(setUpdate, 1000);
 
         currTrack.addEventListener('ended', nextTrack);
-        // randomBgColor();
     }
 
     // function randomBgColor() {

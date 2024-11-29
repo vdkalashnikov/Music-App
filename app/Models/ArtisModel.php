@@ -7,11 +7,11 @@ use CodeIgniter\Model;
 class ArtisModel extends Model
 {
     protected $table = 'artis';
-    protected $primaryKey = 'id_artis';
+    protected $primaryKey = 'id';
     protected $allowedFields = [
-        'id_artis',
-        'nama',
-        'picture',
+        'id',
+        'name',
+        'image',
         'artimg'
     ];
 }
