@@ -28,7 +28,6 @@ body {
   border: 1px solid transparent;
   width: 50rem;
   padding: 2rem;
-  /* padding: 30px; */
   border-radius: 20px;
   background-color: #ddd;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
@@ -40,7 +39,6 @@ body {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background-color: blue;
   width: 100%;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -76,12 +74,12 @@ body {
 }
 
 .buttons {
+  margin-top: 1rem;
   display: flex;
   width: 100%;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: green;
   gap: 3rem;
 }
 .active {
@@ -96,14 +94,6 @@ body {
   opacity: 0.8;
   transition: opacity 0.2s;
 }
-/* .repeat-track,
-    .random-track,
-    .playpause-track,
-    .prev-track,
-    .next-track {
-      width: 4rem;
-      background-color: white;
-    } */
 
 .repeat-track:hover,
 .random-track:hover,
@@ -138,7 +128,6 @@ body {
   width: 15px;
   height: 15px;
   background: white;
-  border: 3px solid #3774ff;
   cursor: grab;
   border-radius: 100%;
 }
@@ -147,7 +136,10 @@ body {
   font-size: 2rem;
 }
 
-.buttons i.fa-play-circle {
+.buttons i.fa-play-circle{
+  font-size: 2.5rem;
+}
+.buttons i.fa-pause-circle{
   font-size: 2.5rem;
 }
 
@@ -296,6 +288,9 @@ p {
   }
 
   .buttons i.fa-play-circle {
+    font-size: 1.8rem;
+  }
+  .buttons i.fa-pause-circle{
     font-size: 1.8rem;
   }
 }
