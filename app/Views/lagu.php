@@ -25,19 +25,19 @@
 
             <div class="buttons">
                 <div class="random-track" onclick="randomTrack()">
-                    <i class="fas fa-random fa-2x" title="random"></i>
+                    <i class="fa fa-random" title="random"></i>
                 </div>
                 <div class="prev-track" onclick="prevTrack()">
-                    <i class="fa fa-step-backward fa-2x"></i>
+                    <i class="fa fa-step-backward"></i>
                 </div>
                 <div class="playpause-track" onclick="playpauseTrack()">
-                    <i class="fa fa-play-circle fa-4x"></i>
+                    <i class="fa fa-play-circle"></i>
                 </div>
                 <div class="next-track" onclick="nextTrack()">
-                    <i class="fa fa-step-forward fa-2x"></i>
+                    <i class="fa fa-step-forward"></i>
                 </div>
                 <div class="repeat-track" onclick="repeatTrack()">
-                    <i class="fa fa-repeat fa-2x" title="repeat"></i>
+                    <i class="fa fa-repeat" title="repeat"></i>
                 </div>
             </div>
         </div>

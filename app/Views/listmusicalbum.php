@@ -15,7 +15,6 @@
                     <a href="<?= route_to('user.artis', $artis['id']); ?>"><img src="<?= base_url('image/' . $artis['image']); ?>" alt="<?= $artis['name']; ?>"></a>
                     <h2><?= $album['name']; ?> . <?= $jumlahLagu; ?> Lagu, <?= $totalDuration; ?></h2>
                 </div>
-
             </div>
         </div>
     </div>

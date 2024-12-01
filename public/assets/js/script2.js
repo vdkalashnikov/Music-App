@@ -143,6 +143,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
     randomIcon.addEventListener('click', randomTrack);
     repeatBtn.addEventListener('click', repeatTrack);
 
-
     loadTrack(trackIndex);
 });
